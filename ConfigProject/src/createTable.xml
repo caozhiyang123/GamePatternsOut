@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+解析以下XML文档，根据配置信息要求实现:
+1.连接指定数据库
+2.创建table
+-->
+<config>
+	<db id="mysql">
+		<property name="driverClass">com.mysql.jdbc.Driver</property>
+		<property name="url">jdbc:mysql://127.0.0.1:3306/test</property>
+		<property name="user">root</property>
+		<property name="password">MyNewPass</property>
+	</db>
+	<table tableName="tbuser">
+		<property name="id"  column="uid"  type="integer"></property>
+		<property name="account" column="username" type="varchar" length="255"></property>
+		<property name="password" column="passowrd" type="varchar" length="255"></property>
+	</table>
+</config>

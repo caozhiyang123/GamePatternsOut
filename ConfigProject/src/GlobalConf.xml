@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <result>
+        <title>SmartGames-global-config</title>
+        <items>
+            <sql>
+            	<property name="url">jdbc.apache.commons:dbcp:DBManager</property>
+            	<property name="username"></property>
+            	<property name="password"></property>
+            </sql>
+            <mongoDB>
+            	<IPMongoA>
+            		<ip>127.0.0.1</ip>
+            		<prot>27017</prot>
+            	</IPMongoA>
+            	<IPMongoB>
+            		<ip>127.0.0.1</ip>
+            		<prot>27017</prot>
+            	</IPMongoB>
+            	<IPMongoC>
+            		<ip>127.0.0.1</ip>
+            		<prot>27017</prot>
+            	</IPMongoC>
+            	<property name="ConnectionsPerHost">50</property>
+            	<property name="numberOfWrites">1</property>
+            </mongoDB>
+            <item id="zonas">
+                <property name="BingoGamesFacotryV2">
+                	<zona name="zona38">
+                	<!--
+						private static NumberVO availableNumberArray[] = new NumberVO[60];
+						-->
+                		<helpRounds type="byte">14</helpRounds>
+                		<qtdDiscarded type="int">5</qtdDiscarded>
+                		<percentageForJackpot type="double">0.00095</percentageForJackpot>
+                		<initialBallsQuantity type="byte">33</initialBallsQuantity>
+                		<idGame type="byte">38</idGame>
+                		<gameName type="String">NineBall</gameName>
+                		<extraBallsQuantity type="byte">9</extraBallsQuantity>
+                		<availableNumberArray name="SingleArray" type="NumberVO" length="60">
+                			
+                		</availableNumberArray>
+                		<conversion type="conversion">4</conversion>
+                		<maxExtraBallsDiscarded type="byte">5</maxExtraBallsDiscarded>
+                		<prizeLimitToExtraBall type="byte">4</prizeLimitToExtraBall>
+                		<maxRounds type="long">3000000</maxRounds>
+                		<quantityNumbersInCard type="byte">15</quantityNumbersInCard>
+                		<jackpotBall type="byte">30</jackpotBall>
+                		<qtdReleaseD type="byte">15</qtdReleaseD>
+                		<DReleasedLimit type="byte">1</DReleasedLimit>
+                		<DLimit type="byte">4</DLimit>
+                		<DExtraLimit type="byte">4</DExtraLimit>
+                		<qtdReleaseN type="byte">0</qtdReleaseN>
+                		<NReleasedLimit type="byte">0</NReleasedLimit>
+                		<NLimit type="byte">4</NLimit>
+                		<NExtraLimit type="byte">1</NExtraLimit>
+                		<qtdReleaseH type="byte">0</qtdReleaseH>
+                		<HReleasedLimit type="byte">0</HReleasedLimit>
+                		<HLimit type="byte">1</HLimit>
+                		<HExtraLimit type="byte">0</HExtraLimit>
+                		<maxRandom type="double">0.00</maxRandom>
+                		<maxPrize type="int">1500</maxPrize>
+                		<maxCards type="int">4</maxCards>
+                		<empty type="byte">0</empty>
+                		<hasAllEB type="boolean">false</hasAllEB>
+                		<effectiveBallsCount type="int">60</effectiveBallsCount>
+                		<typeEquiv type="String">EQUIV</typeEquiv>
+                		<ebHouseEdge type="double">1.00</ebHouseEdge>
+                		<ebMinPrice type="int">0</ebMinPrice>
+                		<numOfRaffledBalls type="int">33</numOfRaffledBalls>
+                		<prizes name="SingleArray" type="PrizeVO">
+							<prize>
+								<pattern>111111111111111</pattern>
+								<value>1000</value>
+								<nameToScream>bingo</nameToScream>
+								<scream>true</scream>
+								<doubleXP>true</doubleXP>
+							</prize>
+							<prize>
+								<pattern>111111111100000</pattern>
+								<value>100</value>
+								<nameToScream>linhadupla</nameToScream>
+								<scream>true</scream>
+							</prize>
+							<prize>
+								<pattern>111110000011111</pattern>
+								<value>100</value>
+								<nameToScream>linhadupla</nameToScream>
+								<scream>true</scream>
+							</prize>
+							<prize>
+								<pattern>000001111111111</pattern>
+								<value>100</value>
+								<nameToScream>linhadupla</nameToScream>
+								<scream>true</scream>
+							</prize>
+							<prize>
+								<pattern>111110000000000</pattern>
+								<value>4</value>
+							</prize>
+							<prize>
+								<pattern>000001111100000</pattern>
+								<value>4</value>
+							</prize>
+							<prize>
+								<pattern>000000000011111</pattern>
+								<value>4</value>
+							</prize>
+                		</prizes>
+                	</zona>
+                	<zona name="zona39"></zona>
+                	<zona name="zona41"></zona>
+                	<zona name="zona42"></zona>
+                	<zona name="zona45"></zona>
+                	<zona name="zona49"></zona>
+                	<zona name="zona50"></zona>
+                	<zona name="zona51"></zona>
+                	<zona name="zona60"></zona>
+                	<zona name="zona52"></zona>
+                	<zona name="zona54"></zona>
+                	<zona name="zona48"></zona>
+                	<zona name="zona55"></zona>
+                	<zona name="zona56"></zona>
+                	<zona name="zona57"></zona>
+                	<zona name="zona61"></zona>
+                </property>
+                <property name="BingoGamesFacotry">
+                	<zona name="zona19"></zona>
+                	<zona name="zona20"></zona>
+                	<zona name="zona21"></zona>
+                	<zona name="zona22"></zona>
+                	<zona name="zona23"></zona>
+                	<zona name="zona24"></zona>
+                </property>
+                <property name="SlotGamesFacotry">
+                	<zona name="zona46"></zona>
+                	<zona name="zona47"></zona>
+                	<zona name="zona63"></zona>
+                </property>
+            </item>
+            
+        </items>
+    </result>
+</root>

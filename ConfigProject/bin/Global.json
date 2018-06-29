@@ -1,0 +1,14 @@
+{
+	"sql":{"url":"jdbc.apache.commons:dbcp:DBManager"},
+	"mongoDB":{"IPMongoA":{"ip":"127.0.0.1","port":27017},
+			   "IPMongoB":{"ip":"127.0.0.1","port":27017},
+			   "IPMongoC":{"ip":"127.0.0.1","port":27017},
+			   "ConnectionsPerHost":50,"numberOfWrites":1},
+	"zona":{"BingoGamesFacotryV2":{"zona38":{"helpRounds":{"type":"byte","value":14},
+											 "qtdDiscarded":{"type":"int","value":5},
+											 "percentageForJackpot":{"type":"double","value":0.00095},
+											 "initialBallsQuantity":{"type":"byte","value":33},
+											 "idGame":{"type":"byte","value":38}
+											 }}}
+    
+}
