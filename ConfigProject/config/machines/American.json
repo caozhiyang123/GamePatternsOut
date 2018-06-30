@@ -3,6 +3,8 @@
     "name": "American_Champion",
     "cardWidth":5,
     "cardHeight":5,
+    "availableBalls":100
+    "maxPrizeValue":1000,
 	"pattern": [{
 		"name": "bingo",
 		"alias": "P01",

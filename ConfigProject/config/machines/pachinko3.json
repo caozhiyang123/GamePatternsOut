@@ -1,0 +1,377 @@
+{
+    "id": 41,
+    "name": "pachinko3",
+    "cardWidth":5,
+    "cardHeight":5,
+    "availableBalls":96
+    "maxPrizeValue":3000,
+	"pattern": [{
+		"name": "bingo",
+		"alias": "P01",
+		"format": "1111111111110111111111111",
+		"value": 3000,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "false Bingo",
+		"alias": "P02",
+		"format": "1111111011100011101111111",
+		"value": 1500,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "four_line",
+		"alias": "P03",
+		"format": "1111111111110111111100000",
+		"value": 500,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "four_line",
+		"alias": "P04",
+		"format": "1111111111110110000011111",
+		"value": 500,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "four_line",
+		"alias": "P05",
+		"format": "1111111111000001111111111",
+		"value": 400,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "four_line",
+		"alias": "P06",
+		"format": "1111100000110111111111111",
+		"value": 500,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "four_line",
+		"alias": "P07",
+		"format": "0000011111110111111111111",
+		"value": 500,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "perimeter",
+		"alias": "P08",
+		"format": "1111110001100011000111111",
+		"value": 250,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "#",
+		"alias": "P09",
+		"format": "0101011111010101111101010",
+		"value": 150,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_P",
+		"alias": "P10",
+		"format": "1111010010110101000010000",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_A",
+		"alias": "P11",
+		"format": "1111010010110101001010010",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_C",
+		"alias": "P12",
+		"format": "1111010000100001000011110",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_H",
+		"alias": "P13",
+		"format": "1001010010110101001010010",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_I",
+		"alias": "P14",
+		"format": "1110001000010000100011100",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_N",
+		"alias": "P15",
+		"format": "1001011010110101011010010",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_K",
+		"alias": "P16",
+		"format": "1001010100110001010010010",
+		"value": 100,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "letter_O",
+		"alias": "P17",
+		"format": "1111010010100101001011110",
+		"value": 500,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "three_line",
+		"alias": "P18",
+		"format": "0000000000110111111111111",
+		"value": 50,
+		"r": -1,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P19",
+		"format": "0000011111000001111111111",
+		"value": 50,
+		"r": -1,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P20",
+		"format": "0000011111110110000011111",
+		"value": 50,
+		"r": -1,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P21",
+		"format": "0000011111110111111100000",
+		"value": 50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P22",
+		"format": "1111100000000001111111111",
+		"value": 50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P23",
+		"format": "1111100000110110000011111",
+		"value":50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P24",
+		"format": "1111100000110111111100000",
+		"value":50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P25",
+		"format": "1111111111000000000011111",
+		"value": 50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P26",
+		"format": "1111111111000001111100000",
+		"value": 50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "three_line",
+		"alias": "P27",
+		"format": "1111111111110110000000000",
+		"value": 50,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "chess",
+		"alias": "P28",
+		"format": "1010101010100010101010101",
+		"value": 25,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "square",
+		"alias": "P29",
+		"format": "0000001110010100111000000",
+		"value": 10,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "cross",
+		"alias": "P30",
+		"format": "0010000100110110010000100",
+		"value": 10,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P31",
+		"format": "1111111111000000000000000",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P32",
+		"format": "1111100000110110000000000",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P33",
+		"format": "1111100000000001111100000",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P34",
+		"format": "1111100000000000000011111",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P35",
+		"format": "0000011111110110000000000",
+		"value":8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P36",
+		"format": "0000011111000001111100000",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P37",
+		"format": "0000011111000000000011111",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P38",
+		"format": "0000000000110111111100000",
+		"value": 8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P39",
+		"format": "0000000000110110000011111",
+		"value":8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "two_line",
+		"alias": "P40",
+		"format": "0000000000000001111111111",
+		"value":8,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "four_corners",
+		"alias": "P41",
+		"format": "1000100000000000000010001",
+		"value": 2,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	}]
+}
