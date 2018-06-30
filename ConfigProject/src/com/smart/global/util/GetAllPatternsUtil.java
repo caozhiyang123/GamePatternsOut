@@ -161,16 +161,17 @@ public class GetAllPatternsUtil
 	public static void main(String[] args)
 	{
 		GetAllPatternsUtil getAllPatternsUtil = new GetAllPatternsUtil();
-		getAmericanPatternsNew(getAllPatternsUtil);
+		//gameId:29
+		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json");
 	}
 
-	public static void getAmericanPatternsNew(GetAllPatternsUtil getAllPatternsUtil)
+	public static void getAmericanPatternsNew(GetAllPatternsUtil getAllPatternsUtil,int gameId,String fileName)
 	{
-		JsonRootBean jsonRoot = getAmericanPatterns(getAllPatternsUtil);
+		JsonRootBean jsonRoot = getAmericanPatterns(getAllPatternsUtil,gameId,fileName);
 		//去重
 		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
 		//add defalut pattern
-		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(29,"American.json");
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
 		getAllPatternsUtil.initPatterns(patterns3);
 		possiblePatterns.addAll(patterns3);
 		//去重
@@ -189,14 +190,14 @@ public class GetAllPatternsUtil
 	}
 	
 
-	public static JsonRootBean getAmericanPatterns(GetAllPatternsUtil getAllPatternsUtil )
+	public static JsonRootBean getAmericanPatterns(GetAllPatternsUtil getAllPatternsUtil,int gameId,String fileName)
 	{
 		//2/7
-		List<Pattern> patterns = getAllPatternsUtil.getPatterns(29,"American.json");//2/7,
+		List<Pattern> patterns = getAllPatternsUtil.getPatterns(gameId,fileName);//2/7,
 		getAllPatternsUtil.initPatterns(patterns);
 		getAllPatternsUtil.getPossiblePatternsFromTwoInN(patterns);
 		//3/7
-		List<Pattern> patterns2 = getAllPatternsUtil.getPatterns(29,"American.json");//3/7
+		List<Pattern> patterns2 = getAllPatternsUtil.getPatterns(gameId,fileName);//3/7
 		getAllPatternsUtil.initPatterns(patterns2);
 		getAllPatternsUtil.getPossiblePatternsFormThreeInN(patterns2);
 		patterns.addAll(patterns2);
