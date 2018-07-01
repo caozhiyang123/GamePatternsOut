@@ -153,34 +153,40 @@ public class GetAllPatternsUtil
 	}
 	private void getPossiblePatternsFromEightInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
-		for(int i=0;i<patterns.size();i++){
+		Pattern pattern = null;
+		int i,j,k,L,m,n,p,q = 0 ;
+		int code1,code2,code3,code4,code5,code6,code7,code8,codeNew=0;
+		int numPerCard = cardHeight*cardWidth;
+		String patternNew = "";
+		int size = patterns.size();
+		for(i=0;i<patterns.size();i++){
 			if(i==patterns.size()-1) {
 				System.out.println(i);
 			}
-			for(int j=i+1;j<patterns.size();j++){
-				for(int k = j+1;k<patterns.size();k++){
-					for(int L=k+1;L< patterns.size();L++) {
-						for(int m=L+1;m<patterns.size();m++) {
-							for(int n=m+1;n<patterns.size();n++) {
-								for(int p=n+1;p<patterns.size();p++) {
-									for(int q=p+1;q<patterns.size();q++) {
+			for(j=i+1;j<patterns.size();j++){
+				for(k = j+1;k<patterns.size();k++){
+					for(L=k+1;L< patterns.size();L++) {
+						for(m=L+1;m<patterns.size();m++) {
+							for(n=m+1;n<patterns.size();n++) {
+								for(p=n+1;p<patterns.size();p++) {
+									for(q=p+1;q<patterns.size();q++) {
 										int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue();
 										if(value >maxPrizeValue) {
 											continue;
 										}
-										Pattern pattern = new Pattern();
+										pattern = new Pattern();
 										pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue());
 										pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName());
-										int code1 = patterns.get(i).getFormatCode();
-										int code2 = patterns.get(j).getFormatCode();
-										int code3 = patterns.get(k).getFormatCode();
-										int code4 = patterns.get(L).getFormatCode();
-										int code5 = patterns.get(m).getFormatCode();
-										int code6 = patterns.get(n).getFormatCode();
-										int code7 = patterns.get(p).getFormatCode();
-										int code8 = patterns.get(q).getFormatCode();
-										int codeNew = code1 | code2 | code3 |code4 |code5 |code6 |code7 |code8;
-										String patternNew = Integer.toBinaryString(codeNew);
+										code1 = patterns.get(i).getFormatCode();
+										code2 = patterns.get(j).getFormatCode();
+										code3 = patterns.get(k).getFormatCode();
+										code4 = patterns.get(L).getFormatCode();
+										code5 = patterns.get(m).getFormatCode();
+										code6 = patterns.get(n).getFormatCode();
+										code7 = patterns.get(p).getFormatCode();
+										code8 = patterns.get(q).getFormatCode();
+										codeNew = code1 | code2 | code3 |code4 |code5 |code6 |code7 |code8;
+										patternNew = Integer.toBinaryString(codeNew);
 										if(patternNew.length()< cardHeight*cardWidth){
 											patternNew = "00000"+patternNew;
 										}
@@ -605,13 +611,13 @@ public class GetAllPatternsUtil
 //		getAllPatternsUtil.initPatterns(patterns5);
 //		getAllPatternsUtil.getPossiblePatternsFromSixInN(patterns5);
 		//7/19
-		List<Pattern> patterns6 = getAllPatternsUtil.getPatterns(gameId,fileName);
-		getAllPatternsUtil.initPatterns(patterns6);
-		getAllPatternsUtil.getPossiblePatternsFromSevenInN(patterns6);
+//		List<Pattern> patterns6 = getAllPatternsUtil.getPatterns(gameId,fileName);
+//		getAllPatternsUtil.initPatterns(patterns6);
+//		getAllPatternsUtil.getPossiblePatternsFromSevenInN(patterns6);
 		//8/19
-//		List<Pattern> patterns7 = getAllPatternsUtil.getPatterns(gameId,fileName);
-//		getAllPatternsUtil.initPatterns(patterns7);
-//		getAllPatternsUtil.getPossiblePatternsFromEightInN(patterns7);
+		List<Pattern> patterns7 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns7);
+		getAllPatternsUtil.getPossiblePatternsFromEightInN(patterns7);
 //		//9/19
 //		List<Pattern> patterns8 = getAllPatternsUtil.getPatterns(gameId,fileName);
 //		getAllPatternsUtil.initPatterns(patterns8);
@@ -621,8 +627,8 @@ public class GetAllPatternsUtil
 //		patterns.addAll(patterns3);
 //		patterns.addAll(patterns4);
 //		patterns.addAll(patterns5);
-		patterns.addAll(patterns6);
-//		patterns.addAll(patterns7);
+//		patterns.addAll(patterns6);
+		patterns.addAll(patterns7);
 //		patterns.addAll(patterns8);
 		//rounstastics
 		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
