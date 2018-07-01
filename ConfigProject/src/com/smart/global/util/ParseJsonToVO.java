@@ -36,6 +36,8 @@ public class ParseJsonToVO
                jsonRootBean.setMachineName(jsonObject.get("name").toString());
                jsonRootBean.setCardWitdh(Integer.parseInt(jsonObject.get("cardWidth").toString()));
                jsonRootBean.setCardHeight(Integer.parseInt(jsonObject.get("cardHeight").toString()));
+               jsonRootBean.setAvailableBalls(Integer.parseInt(jsonObject.get("availableBalls").toString()));
+               jsonRootBean.setMaxPrizeValue(Integer.parseInt(jsonObject.get("maxPrizeValue").toString()));
                this.setMachinePattern();
                jsonRootBean.setPattern(getMachinePattern());
                machineVOMaps.put(key, jsonRootBean);

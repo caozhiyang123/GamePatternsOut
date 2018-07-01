@@ -15,6 +15,7 @@ public class GetAllPatternsUtil
 {
 	private int cardWidth;
 	private int cardHeight;
+	private int maxPrizeValue;
 	private JsonRootBean jsonRootBean = null;
 	private List<Pattern> getMachinePatterns(int machineID,String fileName){
 		ParseJsonToVO parseJsonToVO = new ParseJsonToVO();
@@ -22,6 +23,7 @@ public class GetAllPatternsUtil
 		jsonRootBean = machinePatterns.get(fileName);
 		cardWidth = jsonRootBean.getCardWitdh();
 		cardHeight = jsonRootBean.getCardHeight();
+		maxPrizeValue = jsonRootBean.getMaxPrizeValue();
 		if(jsonRootBean!=null && jsonRootBean.getMachineId() == machineID){
 			List<Pattern> patterns = jsonRootBean.getPattern();
 			return patterns;
@@ -95,14 +97,21 @@ public class GetAllPatternsUtil
 	private void getPossiblePatternsFromNineInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		for(int i=0;i<patterns.size();i++){
+			if(i==patterns.size()-1) {
+				System.out.println(i);
+			}
 			for(int j=i+1;j<patterns.size();j++){
 				for(int k = j+1;k<patterns.size();k++){
 					for(int L=k+1;L< patterns.size();L++) {
 						for(int m=L+1;m<patterns.size();m++) {
 							for(int n=m+1;n<patterns.size();n++) {
-								for(int p=0;p<patterns.size();p++) {
-									for(int q=0;q<patterns.size();q++) {
-										for(int r=0;r<patterns.size();r++) {
+								for(int p=n+1;p<patterns.size();p++) {
+									for(int q=p+1;q<patterns.size();q++) {
+										for(int r=q+1;r<patterns.size();r++) {
+											int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue()+patterns.get(r).getValue();
+											if(value >maxPrizeValue) {
+												continue;
+											}
 											Pattern pattern = new Pattern();
 											pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue()+patterns.get(r).getValue());
 											pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName()+"+"+patterns.get(r).getName());
@@ -124,6 +133,8 @@ public class GetAllPatternsUtil
 											pattern.setFormatCode(codeNew);
 											pattern.setSunNum(PatternUtil.sunNum(codeNew, cardHeight*cardWidth));
 											newPatterns.add(pattern);
+											//去重 避免Heap内存溢出
+											newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
 										}
 									}
 								}
@@ -143,13 +154,20 @@ public class GetAllPatternsUtil
 	private void getPossiblePatternsFromEightInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		for(int i=0;i<patterns.size();i++){
+			if(i==patterns.size()-1) {
+				System.out.println(i);
+			}
 			for(int j=i+1;j<patterns.size();j++){
 				for(int k = j+1;k<patterns.size();k++){
 					for(int L=k+1;L< patterns.size();L++) {
 						for(int m=L+1;m<patterns.size();m++) {
 							for(int n=m+1;n<patterns.size();n++) {
-								for(int p=0;p<patterns.size();p++) {
-									for(int q=0;q<patterns.size();q++) {
+								for(int p=n+1;p<patterns.size();p++) {
+									for(int q=p+1;q<patterns.size();q++) {
+										int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue();
+										if(value >maxPrizeValue) {
+											continue;
+										}
 										Pattern pattern = new Pattern();
 										pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue());
 										pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName());
@@ -170,6 +188,8 @@ public class GetAllPatternsUtil
 										pattern.setFormatCode(codeNew);
 										pattern.setSunNum(PatternUtil.sunNum(codeNew, cardHeight*cardWidth));
 										newPatterns.add(pattern);
+										//去重 避免Heap内存溢出
+										newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
 									}
 								}
 							}
@@ -189,14 +209,21 @@ public class GetAllPatternsUtil
 	private void getPossiblePatternsFromSevenInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		for(int i=0;i<patterns.size();i++){
+			if(i==patterns.size()-1) {
+				System.out.println(i);
+			}
 			for(int j=i+1;j<patterns.size();j++){
 				for(int k = j+1;k<patterns.size();k++){
 					for(int L=k+1;L< patterns.size();L++) {
 						for(int m=L+1;m<patterns.size();m++) {
 							for(int n=m+1;n<patterns.size();n++) {
-								for(int p=0;p<patterns.size();p++) {
+								for(int p=n+1;p<patterns.size();p++) {
+									int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue();
+									if(value >maxPrizeValue) {
+										continue;
+									}
 									Pattern pattern = new Pattern();
-									pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue());
+									pattern.setValue(value);
 									pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName());
 									int code1 = patterns.get(i).getFormatCode();
 									int code2 = patterns.get(j).getFormatCode();
@@ -214,6 +241,8 @@ public class GetAllPatternsUtil
 									pattern.setFormatCode(codeNew);
 									pattern.setSunNum(PatternUtil.sunNum(codeNew, cardHeight*cardWidth));
 									newPatterns.add(pattern);
+									//去重 避免Heap内存溢出
+									newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
 								}
 							}
 						}
@@ -232,11 +261,18 @@ public class GetAllPatternsUtil
 	private void getPossiblePatternsFromSixInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		for(int i=0;i<patterns.size();i++){
+			if(i==patterns.size()-1) {
+				System.out.println(i);
+			}
 			for(int j=i+1;j<patterns.size();j++){
 				for(int k = j+1;k<patterns.size();k++){
 					for(int L=k+1;L< patterns.size();L++) {
 						for(int m=L+1;m<patterns.size();m++) {
 							for(int n=m+1;n<patterns.size();n++) {
+								int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue();
+								if(value >maxPrizeValue) {
+									continue;
+								}
 								Pattern pattern = new Pattern();
 								pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue());
 								pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName());
@@ -255,6 +291,8 @@ public class GetAllPatternsUtil
 								pattern.setFormatCode(codeNew);
 								pattern.setSunNum(PatternUtil.sunNum(codeNew, cardHeight*cardWidth));
 								newPatterns.add(pattern);
+								//去重 避免Heap内存溢出
+								newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
 							}
 						}
 					}
@@ -275,6 +313,10 @@ public class GetAllPatternsUtil
 				for(int k = j+1;k<patterns.size();k++){
 					for(int L=k+1;L< patterns.size();L++) {
 						for(int m=L+1;m<patterns.size();m++) {
+							int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue();
+							if(value >maxPrizeValue) {
+								continue;
+							}
 							Pattern pattern = new Pattern();
 							pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue());
 							pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName());
@@ -310,6 +352,10 @@ public class GetAllPatternsUtil
 			   for(int j=i+1;j<patterns.size();j++){
 				   for(int k = j+1;k<patterns.size();k++){
 					   for(int L=k+1;L< patterns.size();L++) {
+						   int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue();
+							if(value >maxPrizeValue) {
+								continue;
+							}
 						   Pattern pattern = new Pattern();
 						   pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue());
 						   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName());
@@ -343,6 +389,10 @@ public class GetAllPatternsUtil
 		for(int i=0;i<patterns.size();i++){
 			   for(int j=i+1;j<patterns.size();j++){
 				   for(int k = j+1;k<patterns.size();k++){
+					   int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue();
+						if(value >maxPrizeValue) {
+							continue;
+						}
 					   Pattern pattern = new Pattern();
 					   pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue());
 					   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName());
@@ -375,6 +425,10 @@ public class GetAllPatternsUtil
 	   List<Pattern> newPatterns = new ArrayList<>();
 	   for(int i=0;i<patterns.size();i++){
 		   for(int j=i+1;j<patterns.size();j++){
+			   int value = patterns.get(i).getValue()+patterns.get(j).getValue();
+				if(value >maxPrizeValue) {
+					continue;
+				}
 			   Pattern pattern = new Pattern();
 			   pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue());
 			   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
@@ -402,6 +456,10 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		for(int i=0;i<patterns.size();i++){
 			for(int j=i+1;j<patterns.size();j++){
+				int value = patterns.get(i).getValue()+patterns.get(j).getValue();
+				if(value >maxPrizeValue) {
+					continue;
+				}
 				Pattern pattern = new Pattern();
 				pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue());
 				pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
@@ -459,6 +517,29 @@ public class GetAllPatternsUtil
 		System.out.println(jsonRoot.toString());
 	}
 
+	class newMyThread extends Thread{
+		
+		int a = 0;
+		private GetAllPatternsUtil getAllPatternsUtil;
+		private List<Pattern> patterns;
+		private newMyThread(int a,GetAllPatternsUtil getAllPatternsUtil,List<Pattern> patterns) {
+			this.a = a ;
+			this.getAllPatternsUtil = getAllPatternsUtil;
+			this.patterns = patterns;
+		}
+		
+		@Override
+		public void run() {
+			if(a==2) {
+				getAllPatternsUtil.getPossiblePatternsFromTwoInN(patterns);
+			}else if(a==3) {
+				getAllPatternsUtil.getPossiblePatternsFormThreeInN(patterns);
+			}else if(a==4) {
+				getAllPatternsUtil.getPossiblePatternsFromFourInN(patterns);
+			}
+		}
+	}
+	
 	private static JsonRootBean getAllPossiblePatterns41(GetAllPatternsUtil getAllPatternsUtil, int gameId,
 			String fileName) {
 		//2/19

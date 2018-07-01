@@ -16,10 +16,25 @@ public class JsonRootBean {
 	private String machineName;
 	private int cardWidth;
     private int cardHeight;
+    private int availableBalls;
+    private int maxPrizeValue;
     private List<Pattern> pattern;
     
     
-    public int getCardWitdh()
+    public int getMaxPrizeValue() {
+		return maxPrizeValue;
+	}
+	public void setMaxPrizeValue(int maxPrizeValue) {
+		this.maxPrizeValue = maxPrizeValue;
+	}
+	
+	public int getAvailableBalls() {
+		return availableBalls;
+	}
+	public void setAvailableBalls(int availableBalls) {
+		this.availableBalls = availableBalls;
+	}
+	public int getCardWitdh()
 	{
 		return cardWidth;
 	}
