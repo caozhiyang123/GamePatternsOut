@@ -85,12 +85,13 @@ public class Pattern implements Comparable<Pattern>{
      public boolean getIs_eb() {
          return is_eb;
      }
-	@Override
-	public String toString()
-	{
-		return "Pattern [name=" + name + ", alias=" + alias + ", format=" + format + ", value=" + value + ", r=" + r
-				+ ", weight=" + weight + ", is_eb=" + is_eb + ", formatCode=" + formatCode + ", sunNum=" + sunNum + "]";
-	}
+     
+     @Override
+ 	public String toString() {
+ 		return "Pattern [name=" + name + ", alias=" + alias + ", format=" + format + ", value=" + value + ", r=" + r
+ 				+ ", weight=" + weight + ", is_eb=" + is_eb + ", formatCode=" + formatCode + ", sunNum=" + sunNum + "]";
+ 	}
+	
 	@Override
 	public int compareTo(Pattern o)
 	{
@@ -101,6 +102,8 @@ public class Pattern implements Comparable<Pattern>{
 		}
 		return 0;
 	}
+	
+	
      
 
 }
