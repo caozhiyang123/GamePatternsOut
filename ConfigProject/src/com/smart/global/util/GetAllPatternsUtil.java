@@ -547,10 +547,78 @@ public class GetAllPatternsUtil
 		//gameId:29
 //		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json");
 		//gameId:41
-		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
+//		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
+		//gameId:20
+		getShowBall3PatternsNew(getAllPatternsUtil,20,"showBall3.json");
+		
 	}
 
 	
+	private static void getShowBall3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
+		JsonRootBean jsonRoot = getAllPossiblePatterns20(getAllPatternsUtil,gameId,fileName);
+		//去重
+		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
+		//add defalut pattern
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns3);
+		possiblePatterns.addAll(patterns3);
+		//去重
+		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
+		//按照value从大到小重新排序
+		Collections.sort(possiblePatterns);
+		//别名重定义
+		int a = 0;
+		for (Pattern pattern : possiblePatterns)
+		{
+			pattern.setAlias("P"+a);
+			a++;
+		}
+		jsonRoot.setPattern(possiblePatterns);
+		System.out.println(jsonRoot.toString());
+	}
+
+	private static JsonRootBean getAllPossiblePatterns20(GetAllPatternsUtil getAllPatternsUtil, int gameId,
+		String fileName) {
+		//2/16
+		List<Pattern> patterns = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns);
+		getAllPatternsUtil.getPossiblePatternsFromTwoInN(patterns);
+		//3/16
+		List<Pattern> patterns2 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns2);
+		getAllPatternsUtil.getPossiblePatternsFormThreeInN(patterns2);
+		//4/16
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns3);
+		getAllPatternsUtil.getPossiblePatternsFromFourInN(patterns3);
+		//5/16
+		List<Pattern> patterns4 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns4);
+		getAllPatternsUtil.getPossiblePatternsFromFiveInN(patterns4);
+		//6/16
+		List<Pattern> patterns5 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns5);
+		getAllPatternsUtil.getPossiblePatternsFromSixInN(patterns5);
+		//7/16
+		List<Pattern> patterns6 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns6);
+		getAllPatternsUtil.getPossiblePatternsFromSevenInN(patterns6);
+		//8/16
+		List<Pattern> patterns7 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns7);
+		getAllPatternsUtil.getPossiblePatternsFromEightInN(patterns7);
+		//
+		patterns.addAll(patterns2);
+		patterns.addAll(patterns3);
+		patterns.addAll(patterns4);
+		patterns.addAll(patterns5);
+		patterns.addAll(patterns6);
+		patterns.addAll(patterns7);
+		//rounstastics
+		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
+		return getAllPatternsUtil.jsonRootBean;
+	}
+
 	private static void getPachinko3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns41(getAllPatternsUtil,gameId,fileName);
 		//去重

@@ -73,11 +73,12 @@ public class JsonRootBean {
          return pattern;
      }
 	@Override
-	public String toString()
-	{
-		return "JsonRootBean [machineId=" + machineId + ", machineName=" + machineName + ", cardWitdh=" + cardWidth
-				+ ", cardHeight=" + cardHeight + ", pattern=" + pattern + "]";
+	public String toString() {
+		return "JsonRootBean [machineId=" + machineId + ", machineName=" + machineName + ", cardWidth=" + cardWidth
+				+ ", cardHeight=" + cardHeight + ", availableBalls=" + availableBalls + ", maxPrizeValue="
+				+ maxPrizeValue + ", pattern=" + pattern + "]";
 	}
+	
 	
 
 }

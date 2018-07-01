@@ -89,7 +89,7 @@ public class Pattern implements Comparable<Pattern>{
      @Override
  	public String toString() {
  		return "Pattern [name=" + name + ", alias=" + alias + ", format=" + format + ", value=" + value + ", r=" + r
- 				+ ", weight=" + weight + ", is_eb=" + is_eb + ", formatCode=" + formatCode + ", sunNum=" + sunNum + "]";
+ 				+ ", weight=" + weight + ", is_eb=" + is_eb + ", formatCode=" + formatCode + ", sunNum=" + sunNum +"\r\n"+"]";
  	}
 	
 	@Override
