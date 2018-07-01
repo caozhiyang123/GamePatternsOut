@@ -549,9 +549,11 @@ public class GetAllPatternsUtil
 		//gameId:41
 //		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
 		//gameId:20
-		getShowBall3PatternsNew(getAllPatternsUtil,20,"showBall3.json");
+//		getShowBall3PatternsNew(getAllPatternsUtil,20,"showBall3.json");
 		//gameId:21
-		getShowBall2PatternsNew(getAllPatternsUtil,21,"showBall2.json");
+//		getShowBall2PatternsNew(getAllPatternsUtil,21,"showBall2.json");
+		//gameId:22
+		getShowBall3PatternsNew(getAllPatternsUtil,22,"showBall1.json");
 		
 	}
 
