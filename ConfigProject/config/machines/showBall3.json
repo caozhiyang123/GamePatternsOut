@@ -4,7 +4,7 @@
     "cardWidth":5,
     "cardHeight":3,
     "availableBalls":60
-    "maxPrizeValue":3000,
+    "maxPrizeValue":1500,
 	"pattern": [{
 		"name": "bingo",
 		"alias": "P01",
