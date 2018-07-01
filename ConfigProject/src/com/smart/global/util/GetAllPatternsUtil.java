@@ -369,7 +369,7 @@ public class GetAllPatternsUtil
 	}
 	private void getPossiblePatternsFromFourInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
-		Pattern pattern = null;
+		Pattern pattern = null; 
 		int i,j,k,L = 0 ;
 		int code1,code2,code3,code4 ,codeNew=0;
 		int numPerCard = cardHeight*cardWidth;
