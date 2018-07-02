@@ -1,0 +1,9 @@
+JsonRootBean [machineId=45, machineName=doubleBingo, cardWidth=0, cardHeight=0, numPerCard=13, availableBalls=52, maxPrizeValue=250, pattern=
+[Pattern [name=bingo, alias=P0, format=1111111111111, value=250, r=1, weight=0.0, is_eb=true, formatCode=8191, sunNum=13
+], Pattern [name=double_line, alias=P1, format=1111111110000, value=25, r=1, weight=0.0, is_eb=true, formatCode=8176, sunNum=9
+], Pattern [name=double_line, alias=P2, format=1111000001111, value=25, r=1, weight=0.0, is_eb=true, formatCode=7695, sunNum=8
+], Pattern [name=double_line, alias=P3, format=0000111111111, value=25, r=1, weight=0.0, is_eb=true, formatCode=511, sunNum=9
+], Pattern [name=line, alias=P4, format=1111000000000, value=1, r=1, weight=0.0, is_eb=true, formatCode=7680, sunNum=4
+], Pattern [name=line, alias=P5, format=0000111110000, value=1, r=-1, weight=0.0, is_eb=false, formatCode=496, sunNum=5
+], Pattern [name=line, alias=P6, format=0000000001111, value=1, r=-1, weight=0.0, is_eb=false, formatCode=15, sunNum=4
+]]]

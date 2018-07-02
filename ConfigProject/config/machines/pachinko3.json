@@ -3,7 +3,8 @@
     "name": "pachinko3",
     "cardWidth":5,
     "cardHeight":5,
-    "availableBalls":96
+    "numPerCard":25,
+    "availableBalls":96,
     "maxPrizeValue":3000,
 	"pattern": [{
 		"name": "bingo",

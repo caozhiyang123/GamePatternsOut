@@ -1,11 +1,11 @@
 {
-    "id": 22,
-    "name": "showBall2",
+    "id": 61,
+    "name": "pachinko3",
     "cardWidth":5,
     "cardHeight":3,
     "numPerCard":15,
     "availableBalls":60,
-    "maxPrizeValue":500,
+    "maxPrizeValue":1500,
 	"pattern": [{
 		"name": "bingo",
 		"alias": "P01",
@@ -19,7 +19,7 @@
 		"name": "false Bingo",
 		"alias": "P02",
 		"format": "111111101111111",
-		"value": 470,
+		"value": 1450,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -34,10 +34,10 @@
 		"is_eb": true
 	},
 	{
-		"name": "Double_Triangle",
+		"name": "double_Triangle",
 		"alias": "P04",
 		"format": "111110101011111",
-		"value": 150,
+		"value": 500,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -46,7 +46,7 @@
 		"name": "MW",
 		"alias": "P05",
 		"format": "101011101110101",
-		"value": 70,
+		"value": 200,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -55,7 +55,7 @@
 		"name": "M",
 		"alias": "P06",
 		"format": "100011101110101",
-		"value": 35,
+		"value": 100,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -64,34 +64,34 @@
 		"name": "W",
 		"alias": "P07",
 		"format": "101011101110001",
-		"value": 35,
+		"value": 100,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
 	},
 	{
-		"name": "Double_Line",
+		"name": "double_line",
 		"alias": "P08",
 		"format": "111111111100000",
-		"value": 35,
+		"value": 100,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
 	},
 	{
-		"name": "Double_Line",
+		"name": "double_line",
 		"alias": "P09",
 		"format": "111110000011111",
-		"value": 35,
+		"value": 100,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
 	},
 	{
-		"name": "Double_Line",
+		"name": "double_line",
 		"alias": "P10",
 		"format": "000001111111111",
-		"value": 35,
+		"value": 100,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -100,7 +100,7 @@
 		"name": "square",
 		"alias": "P11",
 		"format": "011100101001110",
-		"value": 15,
+		"value": 40,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -109,25 +109,25 @@
 		"name": "double_V",
 		"alias": "P12",
 		"format": "101010101010101",
-		"value": 15,
+		"value": 40,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
 	},
 	{
-		"name": "up_triangle",
+		"name": "up_trangle",
 		"alias": "P13",
 		"format": "001000101011111",
-		"value": 3,
+		"value": 10,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
 	},
 	{
-		"name": "down_triangle",
+		"name": "down_trangle",
 		"alias": "P14",
 		"format": "111110101000100",
-		"value": 3,
+		"value": 10,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -136,7 +136,7 @@
 		"name": "cross",
 		"alias": "P15",
 		"format": "001001111100100",
-		"value": 2,
+		"value": 8,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -145,7 +145,7 @@
 		"name": "normal_V",
 		"alias": "P16",
 		"format": "100010101000100",
-		"value": 1,
+		"value": 3,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -154,7 +154,7 @@
 		"name": "Upside_Down_V",
 		"alias": "P17",
 		"format": "001000101010001",
-		"value": 1,
+		"value": 3,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
@@ -163,7 +163,7 @@
 		"name": "line",
 		"alias": "P18",
 		"format": "111110000000000",
-		"value": 1,
+		"value": 3,
 		"r": -1,
 		"weight": 0,
 		"is_eb": false
@@ -172,7 +172,7 @@
 		"name": "line",
 		"alias": "P19",
 		"format": "000001111100000",
-		"value": 1,
+		"value": 3,
 		"r": -1,
 		"weight": 0,
 		"is_eb": false
@@ -181,7 +181,7 @@
 		"name": "line",
 		"alias": "P20",
 		"format": "000000000011111",
-		"value": 1,
+		"value": 3,
 		"r": -1,
 		"weight": 0,
 		"is_eb": false

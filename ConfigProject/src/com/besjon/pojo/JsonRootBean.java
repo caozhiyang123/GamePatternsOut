@@ -16,12 +16,21 @@ public class JsonRootBean {
 	private String machineName;
 	private int cardWidth;
     private int cardHeight;
+    private int numPerCard;
     private int availableBalls;
     private int maxPrizeValue;
     private List<Pattern> pattern;
     
     
-    public int getMaxPrizeValue() {
+    public int getNumPerCard()
+	{
+		return numPerCard;
+	}
+	public void setNumPerCard(int numPerCard)
+	{
+		this.numPerCard = numPerCard;
+	}
+	public int getMaxPrizeValue() {
 		return maxPrizeValue;
 	}
 	public void setMaxPrizeValue(int maxPrizeValue) {
@@ -73,12 +82,11 @@ public class JsonRootBean {
          return pattern;
      }
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "JsonRootBean [machineId=" + machineId + ", machineName=" + machineName + ", cardWidth=" + cardWidth
-				+ ", cardHeight=" + cardHeight + ", availableBalls=" + availableBalls + ", maxPrizeValue="
-				+ maxPrizeValue + ", pattern=" + pattern + "]";
+				+ ", cardHeight=" + cardHeight + ", numPerCard=" + numPerCard + ", availableBalls=" + availableBalls
+				+ ", maxPrizeValue=" + maxPrizeValue + ", pattern=" + pattern + "]";
 	}
-	
-	
 
 }

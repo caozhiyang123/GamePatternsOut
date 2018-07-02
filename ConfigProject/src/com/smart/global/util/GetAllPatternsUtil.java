@@ -15,6 +15,7 @@ public class GetAllPatternsUtil
 {
 	private int cardWidth;
 	private int cardHeight;
+	private int numPerCard;
 	private int maxPrizeValue;
 	private JsonRootBean jsonRootBean = null;
 	private List<Pattern> getMachinePatterns(int machineID,String fileName){
@@ -23,6 +24,7 @@ public class GetAllPatternsUtil
 		jsonRootBean = machinePatterns.get(fileName);
 		cardWidth = jsonRootBean.getCardWitdh();
 		cardHeight = jsonRootBean.getCardHeight();
+		numPerCard = jsonRootBean.getNumPerCard();
 		maxPrizeValue = jsonRootBean.getMaxPrizeValue();
 		if(jsonRootBean!=null && jsonRootBean.getMachineId() == machineID){
 			List<Pattern> patterns = jsonRootBean.getPattern();
@@ -53,7 +55,7 @@ public class GetAllPatternsUtil
             pattern.setWeight(weight);
             int code = PatternUtil.parsePatternCode(pattern.getFormat());
             pattern.setFormatCode(code);
-            pattern.setSunNum(PatternUtil.sunNum(code, cardHeight*cardWidth));
+            pattern.setSunNum(PatternUtil.sunNum(code, numPerCard));
         }
     }
 	
@@ -99,7 +101,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p,q ,r= 0 ;
 		int code1,code2,code3,code4,code5,code6,code7,code8,code9,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -162,7 +164,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p,q = 0 ;
 		int code1,code2,code3,code4,code5,code6,code7,code8,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -224,7 +226,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p = 0 ;
 		int code1,code2,code3,code4,code5,code6,code7 ,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -283,7 +285,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p = 0 ;
 		int code1,code2,code3,code4,code5,code6,code7 ,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -337,7 +339,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null;
 		int i,j,k,L,m= 0 ;
 		int code1,code2,code3,code4,code5,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -385,7 +387,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null; 
 		int i,j,k,L = 0 ;
 		int code1,code2,code3,code4 ,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -431,7 +433,7 @@ public class GetAllPatternsUtil
 		Pattern pattern = null;
 		int i,j,k= 0 ;
 		int code1,code2,code3 ,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
@@ -476,7 +478,7 @@ public class GetAllPatternsUtil
 	   Pattern pattern = null;
 		int i,j= 0 ;
 		int code1,code2,codeNew=0;
-		int numPerCard = cardHeight*cardWidth;
+//		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 	   for(i=0;i<patterns.size();i++){
 		   for(j=i+1;j<patterns.size();j++){
@@ -509,33 +511,19 @@ public class GetAllPatternsUtil
 	   //去重
 	   patterns = getPossiblePatternsCompareToSelf(patterns);
 	}
-	public void getPossiblePatternsFromMInN(List<Pattern> patterns,int M){//M<N
+	public void getPossiblePatternsFromOneInN(List<Pattern> patterns,int M){//one<N
 		List<Pattern> newPatterns = new ArrayList<>();
 		for(int i=0;i<patterns.size();i++){
-			for(int j=i+1;j<patterns.size();j++){
-				int value = patterns.get(i).getValue()+patterns.get(j).getValue();
-				if(value >maxPrizeValue) {
-					continue;
-				}
+				int value = patterns.get(i).getValue();
 				Pattern pattern = new Pattern();
-				pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue());
-				pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
-				int code1 = patterns.get(i).getFormatCode();
-				int code2 = patterns.get(j).getFormatCode();
-				int codeNew = code1 | code2;
-				String patternNew = Integer.toBinaryString(codeNew);
-				if(patternNew.length()< cardHeight*cardWidth){
-					patternNew = "00000"+patternNew;
-				}
-				pattern.setFormat(patternNew);
-				pattern.setFormatCode(codeNew);
-				pattern.setSunNum(PatternUtil.sunNum(codeNew, cardHeight*cardWidth));
+				pattern.setValue(patterns.get(i).getValue());
+				pattern.setName(patterns.get(i).getName());
+				int code = patterns.get(i).getFormatCode();
+				pattern.setFormat(patterns.get(i).getFormat());
+				pattern.setFormatCode(code);
+				pattern.setSunNum(PatternUtil.sunNum(code, numPerCard));
 				newPatterns.add(pattern);
-			}
 		}
-		//去重
-		newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
-		
 		patterns.addAll(newPatterns);
 		//去重
 		patterns = getPossiblePatternsCompareToSelf(patterns);
@@ -548,18 +536,144 @@ public class GetAllPatternsUtil
 //		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json");
 		//gameId:41
 //		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
+		//gameId:61
+//		getPachinko2PatternsNew(getAllPatternsUtil,61,"pachinko2.json");
 		//gameId:20
 //		getShowBall3PatternsNew(getAllPatternsUtil,20,"showBall3.json");
 		//gameId:21
 //		getShowBall2PatternsNew(getAllPatternsUtil,21,"showBall2.json");
 		//gameId:22
-		getShowBall3PatternsNew(getAllPatternsUtil,22,"showBall1.json");
-		
+//		getShowBall3PatternsNew(getAllPatternsUtil,22,"showBall1.json");
+		//gameId:24
+//		getBingo3PatternsNew(getAllPatternsUtil,24,"bingo3.json");
+		//gameId:25
+//		getBlackStarPatternsNew(getAllPatternsUtil,23,"blackStar.json");
+		//gameId:38
+//		getNineBallPatternsNew(getAllPatternsUtil,38,"nineBall.json");
+		//gameId:39
+//		getTurbo90PatternsNew(getAllPatternsUtil,39,"t90.json");
+		//gameId:42
+//		getPharaosPatternsNew(getAllPatternsUtil,42,"pharaos.json");
+		//gameId:45
+//		getDoubleBingoPatternsNew(getAllPatternsUtil,45,"doubleBingo.json");
+		//gameId:48
+		getPraCarambaPatternsNew(getAllPatternsUtil,48,"praCaramba.json");
+	}
+
+	
+	private static void getPraCarambaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns48(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static JsonRootBean getAllPossiblePatterns48(GetAllPatternsUtil getAllPatternsUtil, int gameId,
+			String fileName)
+	{
+		//2/12
+		List<Pattern> patterns = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns);
+		getAllPatternsUtil.getPossiblePatternsFromTwoInN(patterns);
+		//3/12
+		List<Pattern> patterns2 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns2);
+		getAllPatternsUtil.getPossiblePatternsFormThreeInN(patterns2);
+		//4/12
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns3);
+		getAllPatternsUtil.getPossiblePatternsFromFourInN(patterns3);
+		//5/12
+		List<Pattern> patterns4 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns4);
+		getAllPatternsUtil.getPossiblePatternsFromFiveInN(patterns4);
+		//6/12
+		List<Pattern> patterns5 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns5);
+		getAllPatternsUtil.getPossiblePatternsFromSixInN(patterns5);
+		//
+		patterns.addAll(patterns2);
+		patterns.addAll(patterns3);
+		patterns.addAll(patterns4);
+		patterns.addAll(patterns5);
+		//rounstastics
+		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
+		return getAllPatternsUtil.jsonRootBean;
+	}
+
+	private static void getDoubleBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getPharaosPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getTurbo90PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getNineBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getBlackStarPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns24(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getBingo3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns24(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static JsonRootBean getAllPossiblePatterns24(GetAllPatternsUtil getAllPatternsUtil, int gameId,
+			String fileName)
+	{
+		//2/9
+		List<Pattern> patterns = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns);
+		getAllPatternsUtil.getPossiblePatternsFromTwoInN(patterns);
+		//3/9
+		List<Pattern> patterns2 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns2);
+		getAllPatternsUtil.getPossiblePatternsFormThreeInN(patterns2);
+		//4/9
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns3);
+		getAllPatternsUtil.getPossiblePatternsFromFourInN(patterns3);
+		//
+		patterns.addAll(patterns2);
+		patterns.addAll(patterns3);
+		//rounstastics
+		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
+		return getAllPatternsUtil.jsonRootBean;
+	}
+
+	private static void getPachinko2PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns20(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
 	}
 
 	
 	private static void getShowBall2PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	public static void getAllGamesPossiblePatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId,
+			String fileName, JsonRootBean jsonRoot)
+	{
 		//去重
 		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
 		//add defalut pattern
@@ -583,10 +697,8 @@ public class GetAllPatternsUtil
 
 	private static JsonRootBean getAllPossiblePatterns21(GetAllPatternsUtil getAllPatternsUtil, int gameId,
 			String fileName) {
-		//2/4
 		List<Pattern> patterns = getAllPatternsUtil.getPatterns(gameId,fileName);
 		getAllPatternsUtil.initPatterns(patterns);
-		getAllPatternsUtil.getPossiblePatternsFromTwoInN(patterns);
 		//rounstastics
 		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
 		return getAllPatternsUtil.jsonRootBean;
@@ -594,25 +706,7 @@ public class GetAllPatternsUtil
 
 	private static void getShowBall3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns20(getAllPatternsUtil,gameId,fileName);
-		//去重
-		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
-		//add defalut pattern
-		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
-		getAllPatternsUtil.initPatterns(patterns3);
-		possiblePatterns.addAll(patterns3);
-		//去重
-		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
-		//按照value从大到小重新排序
-		Collections.sort(possiblePatterns);
-		//别名重定义
-		int a = 0;
-		for (Pattern pattern : possiblePatterns)
-		{
-			pattern.setAlias("P"+a);
-			a++;
-		}
-		jsonRoot.setPattern(possiblePatterns);
-		System.out.println(jsonRoot.toString());
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
 	}
 
 	private static JsonRootBean getAllPossiblePatterns20(GetAllPatternsUtil getAllPatternsUtil, int gameId,
@@ -659,25 +753,7 @@ public class GetAllPatternsUtil
 
 	private static void getPachinko3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns41(getAllPatternsUtil,gameId,fileName);
-		//去重
-		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
-		//add defalut pattern
-		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
-		getAllPatternsUtil.initPatterns(patterns3);
-		possiblePatterns.addAll(patterns3);
-		//去重
-		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
-		//按照value从大到小重新排序
-		Collections.sort(possiblePatterns);
-		//别名重定义
-		int a = 0;
-		for (Pattern pattern : possiblePatterns)
-		{
-			pattern.setAlias("P"+a);
-			a++;
-		}
-		jsonRoot.setPattern(possiblePatterns);
-		System.out.println(jsonRoot.toString());
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
 	}
 
 	/*class newMyThread extends Thread{
@@ -734,9 +810,9 @@ public class GetAllPatternsUtil
 		getAllPatternsUtil.initPatterns(patterns7);
 		getAllPatternsUtil.getPossiblePatternsFromEightInN(patterns7);
 //		//9/19
-//		List<Pattern> patterns8 = getAllPatternsUtil.getPatterns(gameId,fileName);
-//		getAllPatternsUtil.initPatterns(patterns8);
-//		getAllPatternsUtil.getPossiblePatternsFromNineInN(patterns8);
+		List<Pattern> patterns8 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns8);
+		getAllPatternsUtil.getPossiblePatternsFromNineInN(patterns8);
 		//
 		patterns.addAll(patterns2);
 		patterns.addAll(patterns3);
@@ -744,7 +820,7 @@ public class GetAllPatternsUtil
 		patterns.addAll(patterns5);
 		patterns.addAll(patterns6);
 		patterns.addAll(patterns7);
-//		patterns.addAll(patterns8);
+		patterns.addAll(patterns8);
 		//rounstastics
 		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
 		return getAllPatternsUtil.jsonRootBean;
@@ -753,25 +829,7 @@ public class GetAllPatternsUtil
 	public static void getAmericanPatternsNew(GetAllPatternsUtil getAllPatternsUtil,int gameId,String fileName)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns39(getAllPatternsUtil,gameId,fileName);
-		//去重
-		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
-		//add defalut pattern
-		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
-		getAllPatternsUtil.initPatterns(patterns3);
-		possiblePatterns.addAll(patterns3);
-		//去重
-		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
-		//按照value从大到小重新排序
-		Collections.sort(possiblePatterns);
-		//别名重定义
-		int a = 0;
-		for (Pattern pattern : possiblePatterns)
-		{
-			pattern.setAlias("P"+a);
-			a++;
-		}
-		jsonRoot.setPattern(possiblePatterns);
-		System.out.println(jsonRoot.toString());
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
 	}
 	
 

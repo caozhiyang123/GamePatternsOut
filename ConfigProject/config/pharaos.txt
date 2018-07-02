@@ -1,0 +1,10 @@
+JsonRootBean [machineId=42, machineName=pharaos, cardWidth=5, cardHeight=3, availableBalls=60, maxPrizeValue=1000, pattern=
+[Pattern [name=bingo, alias=P0, format=111111111111111, value=1000, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
+], Pattern [name=3_sides, alias=P1, format=111101100111111, value=200, r=1, weight=0.0, is_eb=true, formatCode=31551, sunNum=12
+], Pattern [name=2_sides, alias=P2, format=111101100110001, value=70, r=1, weight=0.0, is_eb=true, formatCode=31537, sunNum=9
+], Pattern [name=2_sides, alias=P3, format=110100100011111, value=70, r=1, weight=0.0, is_eb=true, formatCode=26911, sunNum=9
+], Pattern [name=2_sides, alias=P4, format=101001000111111, value=70, r=1, weight=0.0, is_eb=true, formatCode=21055, sunNum=9
+], Pattern [name=1_side, alias=P5, format=110100100010000, value=4, r=-1, weight=0.0, is_eb=false, formatCode=26896, sunNum=5
+], Pattern [name=1_side, alias=P6, format=101001000100001, value=4, r=-1, weight=0.0, is_eb=false, formatCode=21025, sunNum=5
+], Pattern [name=1_side, alias=P7, format=000000000011111, value=4, r=-1, weight=0.0, is_eb=false, formatCode=31, sunNum=5
+]]]

@@ -1,10 +1,10 @@
 {
-    "id": 20,
-    "name": "showBall3",
+    "id": 48,
+    "name": "praCaramba",
     "cardWidth":5,
     "cardHeight":3,
     "numPerCard":15,
-    "availableBalls":60,
+    "availableBalls":120,
     "maxPrizeValue":1500,
 	"pattern": [{
 		"name": "bingo",
@@ -16,17 +16,8 @@
 		"is_eb": true
 	},
 	{
-		"name": "false Bingo",
-		"alias": "P02",
-		"format": "111111101111111",
-		"value": 1450,
-		"r": 1,
-		"weight": 0,
-		"is_eb": true
-	},
-	{
 		"name": "perimeter",
-		"alias": "P03",
+		"alias": "P02",
 		"format": "111111000111111",
 		"value": 750,
 		"r": 1,
@@ -34,8 +25,8 @@
 		"is_eb": true
 	},
 	{
-		"name": "Double_Triangle",
-		"alias": "P04",
+		"name": "double_trangle",
+		"alias": "P03",
 		"format": "111110101011111",
 		"value": 500,
 		"r": 1,
@@ -44,7 +35,7 @@
 	},
 	{
 		"name": "MW",
-		"alias": "P05",
+		"alias": "P04",
 		"format": "101011101110101",
 		"value": 200,
 		"r": 1,
@@ -52,35 +43,8 @@
 		"is_eb": true
 	},
 	{
-		"name": "M",
-		"alias": "P06",
-		"format": "100011101110101",
-		"value": 100,
-		"r": 1,
-		"weight": 0,
-		"is_eb": true
-	},
-	{
-		"name": "W",
-		"alias": "P07",
-		"format": "101011101110001",
-		"value": 100,
-		"r": 1,
-		"weight": 0,
-		"is_eb": true
-	},
-	{
-		"name": "Double_Line",
-		"alias": "P08",
-		"format": "111111111100000",
-		"value": 100,
-		"r": 1,
-		"weight": 0,
-		"is_eb": true
-	},
-	{
-		"name": "Double_Line",
-		"alias": "P09",
+		"name": "two_line",
+		"alias": "P05",
 		"format": "111110000011111",
 		"value": 100,
 		"r": 1,
@@ -88,8 +52,8 @@
 		"is_eb": true
 	},
 	{
-		"name": "Double_Line",
-		"alias": "P10",
+		"name": "two_line",
+		"alias": "P06",
 		"format": "000001111111111",
 		"value": 100,
 		"r": 1,
@@ -97,92 +61,110 @@
 		"is_eb": true
 	},
 	{
-		"name": "square",
-		"alias": "P11",
-		"format": "011100101001110",
-		"value": 40,
+		"name": "two_line",
+		"alias": "P07",
+		"format": "111111111100000",
+		"value": 100,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
 	},
 	{
-		"name": "double_V",
-		"alias": "P12",
+		"name": "M",
+		"alias": "P08",
+		"format": "100011101110101",
+		"value": 100,
+		"r": -1,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "square",
+		"alias": "P09",
+		"format": "011100101001110",
+		"value": 100,
+		"r": -1,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "chess",
+		"alias": "P10",
 		"format": "101010101010101",
 		"value": 40,
-		"r": 1,
+		"r": -1,
 		"weight": 0,
-		"is_eb": true
+		"is_eb": false
 	},
 	{
-		"name": "up_triangle",
-		"alias": "P13",
+		"name": "trangle",
+		"alias": "P11",
 		"format": "001000101011111",
 		"value": 10,
-		"r": 1,
+		"r": -3,
 		"weight": 0,
-		"is_eb": true
+		"is_eb": false
 	},
 	{
-		"name": "down_triangle",
-		"alias": "P14",
+		"name": "trangle",
+		"alias": "P12",
 		"format": "111110101000100",
 		"value": 10,
-		"r": 1,
+		"r": -3,
 		"weight": 0,
-		"is_eb": true
+		"is_eb": false
 	},
 	{
 		"name": "cross",
-		"alias": "P15",
+		"alias": "P13",
 		"format": "001001111100100",
-		"value": 8,
-		"r": 1,
+		"value":8,
+		"r": -3,
 		"weight": 0,
-		"is_eb": true
+		"is_eb": false
 	},
 	{
-		"name": "normal_V",
-		"alias": "P16",
-		"format": "100010101000100",
-		"value": 3,
-		"r": 1,
-		"weight": 0,
-		"is_eb": true
-	},
-	{
-		"name": "Upside_Down_V",
-		"alias": "P17",
+		"name": "arrow",
+		"alias": "P14",
 		"format": "001000101010001",
 		"value": 3,
-		"r": 1,
+		"r": -3,
 		"weight": 0,
-		"is_eb": true
+		"is_eb": false
+	},
+	{
+		"name": "arrow",
+		"alias": "P15",
+		"format": "100010101000100",
+		"value":3,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "line",
+		"alias": "P16",
+		"format": "111110000000000",
+		"value": 3,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
+	},
+	{
+		"name": "line",
+		"alias": "P17",
+		"format": "000001111100000",
+		"value": 3,
+		"r": -3,
+		"weight": 0,
+		"is_eb": false
 	},
 	{
 		"name": "line",
 		"alias": "P18",
-		"format": "111110000000000",
-		"value": 3,
-		"r": -1,
-		"weight": 0,
-		"is_eb": false
-	},
-	{
-		"name": "line",
-		"alias": "P19",
-		"format": "000001111100000",
-		"value": 3,
-		"r": -1,
-		"weight": 0,
-		"is_eb": false
-	},
-	{
-		"name": "line",
-		"alias": "P20",
 		"format": "000000000011111",
 		"value": 3,
-		"r": -1,
+		"r": -3,
 		"weight": 0,
 		"is_eb": false
 	}]

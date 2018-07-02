@@ -15,4 +15,9 @@ public class FileUtil {
             return filename.substring(extensionPos+1);
         }
     }
+    
+    public static void main(String[] args)
+	{
+		System.out.println(Double.parseDouble("6.5"));
+	}
 }
