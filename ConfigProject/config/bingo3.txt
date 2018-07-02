@@ -1,4 +1,5 @@
-JsonRootBean [machineId=24, machineName=Bingo3, cardWidth=5, cardHeight=5, availableBalls=96, maxPrizeValue=2500, pattern=[Pattern [name=bingo, alias=P0, format=1111111011100011101111111, value=2500, r=1, weight=0.0, is_eb=true, formatCode=33408895, sunNum=20
+JsonRootBean [machineId=24, machineName=Bingo3, cardWidth=5, cardHeight=5, availableBalls=96, maxPrizeValue=2500, pattern=
+[Pattern [name=bingo, alias=P0, format=1111111011100011101111111, value=2500, r=1, weight=0.0, is_eb=true, formatCode=33408895, sunNum=20
 ], Pattern [name=four_line+four_line+four_line+four_line, alias=P1, format=1111111111110111111111111, value=2000, r=0, weight=0.0, is_eb=false, formatCode=33550335, sunNum=24
 ], Pattern [name=four_line+perimeter+three_line+three_line, alias=P2, format=1111111111100011111111111, value=850, r=0, weight=0.0, is_eb=false, formatCode=33540095, sunNum=22
 ], Pattern [name=four_line+perimeter+three_line+three_line, alias=P3, format=1111110001110111111111111, value=850, r=0, weight=0.0, is_eb=false, formatCode=33091583, sunNum=21
