@@ -1,0 +1,18 @@
+JsonRootBean [machineId=62, machineName=t90, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1500, pattern=
+[Pattern [name=bingo, alias=P0, format=111111111111111, value=1500, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
+], Pattern [name=bonus, alias=P1, format=111111000111111, value=600, r=1, weight=0.0, is_eb=true, formatCode=32319, sunNum=12
+], Pattern [name=double_H, alias=P2, format=101011111110101, value=300, r=1, weight=0.0, is_eb=true, formatCode=22517, sunNum=11
+], Pattern [name=double_Z, alias=P3, format=111110101001110, value=200, r=1, weight=0.0, is_eb=true, formatCode=32078, sunNum=10
+], Pattern [name=double_line, alias=P4, format=111111111100000, value=100, r=-1, weight=0.0, is_eb=false, formatCode=32736, sunNum=10
+], Pattern [name=Doublet, alias=P5, format=111110101001010, value=100, r=-1, weight=0.0, is_eb=false, formatCode=32074, sunNum=9
+], Pattern [name=double_line, alias=P6, format=000001111111111, value=100, r=-1, weight=0.0, is_eb=false, formatCode=1023, sunNum=10
+], Pattern [name=double_line, alias=P7, format=111110000011111, value=100, r=-3, weight=0.0, is_eb=false, formatCode=31775, sunNum=10
+], Pattern [name=image_V, alias=P8, format=100011111100100, value=40, r=-3, weight=0.0, is_eb=false, formatCode=18404, sunNum=8
+], Pattern [name=start, alias=P9, format=101010101010101, value=40, r=-3, weight=0.0, is_eb=false, formatCode=21845, sunNum=8
+], Pattern [name=triangle_image, alias=P10, format=001000101011111, value=10, r=-3, weight=0.0, is_eb=false, formatCode=4447, sunNum=8
+], Pattern [name=two_sides, alias=P11, format=100011000110001, value=8, r=-3, weight=0.0, is_eb=false, formatCode=17969, sunNum=6
+], Pattern [name=one_line, alias=P12, format=111110000000000, value=3, r=-3, weight=0.0, is_eb=false, formatCode=31744, sunNum=5
+], Pattern [name=two_sides, alias=P13, format=000001111100000, value=3, r=-3, weight=0.0, is_eb=false, formatCode=992, sunNum=5
+], Pattern [name=polyline, alias=P14, format=001000101010001, value=3, r=-3, weight=0.0, is_eb=false, formatCode=4433, sunNum=5
+], Pattern [name=two_sides, alias=P15, format=000000000011111, value=3, r=-3, weight=0.0, is_eb=false, formatCode=31, sunNum=5
+]]]

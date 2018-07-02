@@ -557,10 +557,69 @@ public class GetAllPatternsUtil
 		//gameId:45
 //		getDoubleBingoPatternsNew(getAllPatternsUtil,45,"doubleBingo.json");
 		//gameId:48
-		getPraCarambaPatternsNew(getAllPatternsUtil,48,"praCaramba.json");
+//		getPraCarambaPatternsNew(getAllPatternsUtil,48,"praCaramba.json");
+		//gameId:49
+//		getSilverBallPatternsNew(getAllPatternsUtil,49,"silverBall.json");
+		//gameId:50
+//		getAztecBallPatternsNew(getAllPatternsUtil,50,"aztec.json");
+		//gameId:51
+//		getTurboManiaPatternsNew(getAllPatternsUtil,51,"turboMania.json");
+		//gameId:52
+//		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json");
+		//gameId:54
+//		getHotBingoPatternsNew(getAllPatternsUtil,54,"hotBingo.json");
+		//gameId:55
+//		getPraCarambaPatternsNew(getAllPatternsUtil,55,"praCarambaNewEB.json");
+		//gameId:56
+//		getGoldBallPatternsNew(getAllPatternsUtil,56,"goldBall.json");
+		//gameId:57
+//		getTurbo90PatternsNew(getAllPatternsUtil,57,"doubleTurbo90.json");
+		//gameId:60
+//		getTurbo90PatternsNew(getAllPatternsUtil,60,"turbo90WorldCup.json");
+		//gameId:62
+//		getTurbo90PatternsNew(getAllPatternsUtil,62,"tripleBonus.json");
+		
+		
 	}
 
 	
+
+	private static void getGoldBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getHotBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getVipBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getTurboManiaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getAztecBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static void getSilverBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	{
+		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
 	private static void getPraCarambaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns48(getAllPatternsUtil,gameId,fileName);

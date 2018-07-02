@@ -1,0 +1,10 @@
+JsonRootBean [machineId=60, machineName=t90WorldCup, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1000, pattern=
+[Pattern [name=bingo, alias=P0, format=111111111111111, value=1250, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
+], Pattern [name=double_line, alias=P1, format=111111111100000, value=125, r=1, weight=0.0, is_eb=true, formatCode=32736, sunNum=10
+], Pattern [name=double_line, alias=P2, format=111110000011111, value=125, r=1, weight=0.0, is_eb=true, formatCode=31775, sunNum=10
+], Pattern [name=double_line, alias=P3, format=000001111111111, value=125, r=1, weight=0.0, is_eb=true, formatCode=1023, sunNum=10
+], Pattern [name=one_line, alias=P4, format=111110000000000, value=5, r=-1, weight=0.0, is_eb=false, formatCode=31744, sunNum=5
+], Pattern [name=one_line, alias=P5, format=000001111100000, value=5, r=-1, weight=0.0, is_eb=false, formatCode=992, sunNum=5
+], Pattern [name=one_line, alias=P6, format=000000000011111, value=5, r=-1, weight=0.0, is_eb=false, formatCode=31, sunNum=5
+], Pattern [name=four_corners, alias=P7, format=100010000010001, value=1, r=-3, weight=0.0, is_eb=false, formatCode=17425, sunNum=4
+]]]

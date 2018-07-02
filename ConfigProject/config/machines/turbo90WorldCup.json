@@ -1,0 +1,82 @@
+{
+  "id": 60,
+  "name": "t90WorldCup",
+  "cardWidth": 5,
+  "cardHeight": 3,
+  "numPerCard":15,
+  "availableBalls":60,
+  "maxPrizeValue":1000,
+  "pattern": [
+    {
+      "name": "bingo",
+	  "alias": "P00",
+      "format": "111111111111111",
+      "value": 1250,
+      "r": 1,
+	  "weight":0,
+      "is_eb": true
+    },
+    {
+      "name": "double_line",
+	  "alias": "P01",
+      "format": "111111111100000",
+      "value": 125,
+      "r": 1,
+	  "weight":0,
+      "is_eb": true
+    },
+    {
+      "name": "double_line",
+	  "alias": "P02",
+      "format": "111110000011111",
+      "value": 125,
+      "r": 1,
+	  "weight":0,
+      "is_eb": true
+    },
+    {
+      "name": "double_line",
+	  "alias": "P03",
+      "format": "000001111111111",
+      "value": 125,
+      "r": 1,
+	  "weight":0,
+      "is_eb": true
+    },
+    {
+      "name": "one_line",
+	  "alias": "P04",
+      "format": "111110000000000",
+      "value": 5,
+      "r": -1,
+	  "weight":0,
+      "is_eb": false
+    },
+    {
+      "name": "one_line",
+	  "alias": "P05",
+      "format": "000001111100000",
+      "value": 5,
+      "r": -1,
+	  "weight":0,
+      "is_eb": false
+    },
+    {
+      "name": "one_line",
+	  "alias": "P06",
+      "format": "000000000011111",
+      "value": 5,
+      "r": -1,
+	  "weight":0,
+      "is_eb": false
+    },
+    {
+      "name": "four_corners",
+	  "alias": "P07",
+      "format": "100010000010001",
+      "value": 1,
+      "r": -3,
+	  "weight":0,
+      "is_eb": false
+     }]
+}

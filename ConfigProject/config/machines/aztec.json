@@ -1,0 +1,81 @@
+{
+    "id": 50,
+    "name": "Aztec",
+    "cardWidth":5,
+    "cardHeight":3,
+    "numPerCard":15,
+    "availableBalls":60,
+    "maxPrizeValue":1000,
+	"pattern": [{
+		"name": "bingo",
+		"alias": "P01",
+		"format": "111111111111111",
+		"value": 1000,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "three_sides",
+		"alias": "P02",
+		"format": "111101100111111",
+		"value": 200,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "two_sides",
+		"alias": "P03",
+		"format": "110100100011111",
+		"value": 70,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "two_sides",
+		"alias": "P04",
+		"format": "101001000111111",
+		"value": 70,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "two_sides",
+		"alias": "P05",
+		"format": "111101100110001",
+		"value": 70,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "one_sides",
+		"alias": "P06",
+		"format": "110100100010000",
+		"value": 3,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "one_sides",
+		"alias": "P07",
+		"format": "101001000100001",
+		"value": 3,
+		"r": 1,
+		"weight": 0,
+		"is_eb": true
+	},
+	{
+		"name": "one_sides",
+		"alias": "P08",
+		"format": "000000000011111",
+		"value": 3,
+		"r": -1,
+		"weight": 0,
+		"is_eb": false
+	}]
+}
