@@ -1,4 +1,4 @@
-JsonRootBean [machineId=51, machineName=turboMania, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1000, pattern=
+JsonRootBean [machineId=51, machineName=turboMania, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1500, pattern=
 [Pattern [name=bingo, alias=P0, format=111111111111111, value=1500, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
 ], Pattern [name=perimeter, alias=P1, format=111111000111111, value=250, r=1, weight=0.0, is_eb=true, formatCode=32319, sunNum=12
 ], Pattern [name=H, alias=P2, format=100011111110001, value=120, r=1, weight=0.0, is_eb=true, formatCode=18417, sunNum=9

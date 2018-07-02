@@ -1,4 +1,4 @@
-JsonRootBean [machineId=60, machineName=t90WorldCup, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1000, pattern=
+JsonRootBean [machineId=60, machineName=t90WorldCup, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1250, pattern=
 [Pattern [name=bingo, alias=P0, format=111111111111111, value=1250, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
 ], Pattern [name=double_line, alias=P1, format=111111111100000, value=125, r=1, weight=0.0, is_eb=true, formatCode=32736, sunNum=10
 ], Pattern [name=double_line, alias=P2, format=111110000011111, value=125, r=1, weight=0.0, is_eb=true, formatCode=31775, sunNum=10

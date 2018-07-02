@@ -1,4 +1,3 @@
-17
 JsonRootBean [machineId=55, machineName=praCarambaNewEB, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=120, maxPrizeValue=1500, pattern=
 [Pattern [name=perimeter+double_trangle+MW+chess+trangle, alias=P0, format=111111101111111, value=1500, r=0, weight=0.0, is_eb=false, formatCode=32639, sunNum=14
 ], Pattern [name=bingo, alias=P1, format=111111111111111, value=1500, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
