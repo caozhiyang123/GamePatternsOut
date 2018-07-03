@@ -1,12 +1,13 @@
 package com.smart.global.util;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import com.besjon.pojo.JsonRootBean;
 import com.besjon.pojo.Pattern;
@@ -121,7 +122,7 @@ public class GetAllPatternsUtil
 												continue;
 											}
 											pattern = new Pattern();
-											pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue()+patterns.get(r).getValue());
+											pattern.setValue(value);
 											pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName()+"+"+patterns.get(r).getName());
 											code1 = patterns.get(i).getFormatCode();
 											code2 = patterns.get(j).getFormatCode();
@@ -183,7 +184,7 @@ public class GetAllPatternsUtil
 											continue;
 										}
 										pattern = new Pattern();
-										pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue());
+										pattern.setValue(value);
 										pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName());
 										code1 = patterns.get(i).getFormatCode();
 										code2 = patterns.get(j).getFormatCode();
@@ -280,6 +281,60 @@ public class GetAllPatternsUtil
 		patterns = getPossiblePatternsCompareToSelf(patterns);
 	}
 	
+	private void getPossiblePatternsFromSixInN52(List<Pattern> patterns) {
+		List<Pattern> newPatterns = new ArrayList<>();
+		Pattern pattern = null;
+		int i,j,k,L,m,n,p = 0 ;
+		int code1,code2,code3,code4,code5,code6,code7 ,codeNew=0;
+//		int numPerCard = cardHeight*cardWidth;
+		String patternNew = "";
+		int size = patterns.size();
+		for(i=0;i<size;i++){
+			if(i==size-1) {
+				System.out.println(i);
+			}
+			for(j=i+1;j<size;j++){
+				for(k = j+1;k<size;k++){
+					for(L=k+1;L<size;L++) {
+						for(m=L+1;m<size;m++) {
+							for(n=m+1;n<size;n++) {
+								int value = getMaxValue( patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue(),patterns.get(m).getValue(),patterns.get(n).getValue());
+								if(value >maxPrizeValue) {
+									continue;
+								}
+								pattern = new Pattern();
+								pattern.setValue(value);
+								pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName());
+								code1 = patterns.get(i).getFormatCode();
+								code2 = patterns.get(j).getFormatCode();
+								code3 = patterns.get(k).getFormatCode();
+								code4 = patterns.get(L).getFormatCode();
+								code5 = patterns.get(m).getFormatCode();
+								code6 = patterns.get(n).getFormatCode();
+								codeNew = code1 | code2 | code3 |code4 |code5 |code6;
+								patternNew = Integer.toBinaryString(codeNew);
+								if(patternNew.length()< numPerCard){
+									patternNew = "00000"+patternNew;
+								}
+								pattern.setFormat(patternNew);
+								pattern.setFormatCode(codeNew);
+								pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
+								newPatterns.add(pattern);
+								//去重 避免Heap内存溢出
+//								newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+							}
+						}
+					}
+				}
+			}
+		}
+		//去重
+//		newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+		patterns.clear();
+		patterns.addAll(newPatterns);
+		//去重
+//		patterns = getPossiblePatternsCompareToSelf(patterns);
+	}
 	private void getPossiblePatternsFromSixInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
@@ -302,7 +357,7 @@ public class GetAllPatternsUtil
 									continue;
 								}
 								pattern = new Pattern();
-								pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue());
+								pattern.setValue(value);
 								pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName());
 								code1 = patterns.get(i).getFormatCode();
 								code2 = patterns.get(j).getFormatCode();
@@ -334,6 +389,55 @@ public class GetAllPatternsUtil
 		//去重
 		patterns = getPossiblePatternsCompareToSelf(patterns);
 	}
+	private void getPossiblePatternsFromFiveInN52(List<Pattern> patterns) {
+		List<Pattern> newPatterns = new ArrayList<>();
+		Pattern pattern = null;
+		int i,j,k,L,m= 0 ;
+		int code1,code2,code3,code4,code5,codeNew=0;
+//		int numPerCard = cardHeight*cardWidth;
+		String patternNew = "";
+		int size = patterns.size();
+		for(i=0;i<size;i++){
+			for(j=i+1;j<size;j++){
+				for( k = j+1;k<size;k++){
+					for(L=k+1;L<size;L++) {
+						for(m=L+1;m<size;m++) {
+							int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue(),patterns.get(m).getValue());
+							if(value >maxPrizeValue) {
+								continue;
+							}
+							pattern = new Pattern();
+							pattern.setValue(value);
+							pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName());
+							code1 = patterns.get(i).getFormatCode();
+							code2 = patterns.get(j).getFormatCode();
+							code3 = patterns.get(k).getFormatCode();
+							code4 = patterns.get(L).getFormatCode();
+							code5 = patterns.get(m).getFormatCode();
+							codeNew = code1 | code2 | code3 |code4 |code5;
+							patternNew = Integer.toBinaryString(codeNew);
+							if(patternNew.length()< numPerCard){
+								patternNew = "00000"+patternNew;
+							}
+							pattern.setFormat(patternNew);
+							pattern.setFormatCode(codeNew);
+							pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
+							newPatterns.add(pattern);
+							//去重 避免Heap内存溢出
+//							newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+						}
+					}
+				}
+			}
+		}
+		//去重
+//		newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+		patterns.clear();
+		patterns.addAll(newPatterns);
+		//去重
+//		patterns = getPossiblePatternsCompareToSelf(patterns);
+	}
+	
 	private void getPossiblePatternsFromFiveInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
@@ -352,7 +456,7 @@ public class GetAllPatternsUtil
 								continue;
 							}
 							pattern = new Pattern();
-							pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue());
+							pattern.setValue(value);
 							pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName());
 							code1 = patterns.get(i).getFormatCode();
 							code2 = patterns.get(j).getFormatCode();
@@ -382,6 +486,52 @@ public class GetAllPatternsUtil
 		//去重
 		patterns = getPossiblePatternsCompareToSelf(patterns);
 	}
+	
+	private void getPossiblePatternsFromFourInN52(List<Pattern> patterns) {
+		List<Pattern> newPatterns = new ArrayList<>();
+		Pattern pattern = null; 
+		int i,j,k,L = 0 ;
+		int code1,code2,code3,code4 ,codeNew=0;
+//		int numPerCard = cardHeight*cardWidth;
+		String patternNew = "";
+		int size = patterns.size();
+		for(i=0;i<size;i++){
+			for(j=i+1;j<size;j++){
+				for(k = j+1;k<size;k++){
+					for(L=k+1;L< size;L++) {
+						int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue());
+						if(value >maxPrizeValue) {
+							continue;
+						}
+						pattern = new Pattern();
+						pattern.setValue(value);
+						pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName());
+						code1 = patterns.get(i).getFormatCode();
+						code2 = patterns.get(j).getFormatCode();
+						code3 = patterns.get(k).getFormatCode();
+						code4 = patterns.get(L).getFormatCode();
+						codeNew = code1 | code2 | code3 |code4;
+						patternNew = Integer.toBinaryString(codeNew);
+						if(patternNew.length()<numPerCard){
+							patternNew = "00000"+patternNew;
+						}
+						pattern.setFormat(patternNew);
+						pattern.setFormatCode(codeNew);
+						pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
+						newPatterns.add(pattern);
+						//去重 避免Heap内存溢出
+//						newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+					}
+				}
+			}
+		}
+		//去重
+//		newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+		patterns.clear();
+		patterns.addAll(newPatterns);
+		//去重
+//		patterns = getPossiblePatternsCompareToSelf(patterns);
+	}
 	private void getPossiblePatternsFromFourInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null; 
@@ -399,7 +549,7 @@ public class GetAllPatternsUtil
 								continue;
 							}
 						   pattern = new Pattern();
-						   pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue());
+						   pattern.setValue(value);
 						   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName());
 						   code1 = patterns.get(i).getFormatCode();
 						   code2 = patterns.get(j).getFormatCode();
@@ -428,6 +578,49 @@ public class GetAllPatternsUtil
 		patterns = getPossiblePatternsCompareToSelf(patterns);
 	}
 	
+	public void getPossiblePatternsFormThreeInN52(List<Pattern> patterns){
+		List<Pattern> newPatterns = new ArrayList<>();
+		Pattern pattern = null;
+		int i,j,k= 0 ;
+		int code1,code2,code3 ,codeNew=0;
+//		int numPerCard = cardHeight*cardWidth;
+		String patternNew = "";
+		int size = patterns.size();
+		for(i=0;i<size;i++){
+			for(j=i+1;j<size;j++){
+				for(k = j+1;k<size;k++){
+					int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue());
+					if(value >maxPrizeValue) {
+						continue;
+					}
+					pattern = new Pattern();
+					pattern.setValue(value);
+					pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName());
+					code1 = patterns.get(i).getFormatCode();
+					code2 = patterns.get(j).getFormatCode();
+					code3 = patterns.get(k).getFormatCode();
+					codeNew = code1 | code2 | code3;
+					patternNew = Integer.toBinaryString(codeNew);
+					if(patternNew.length()< numPerCard){
+						patternNew = "00000"+patternNew;
+					}
+					pattern.setFormat(patternNew);
+					pattern.setFormatCode(codeNew);
+					pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
+					newPatterns.add(pattern);
+					//去重 避免Heap内存溢出
+//					newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+				}
+			}
+		}
+		//去重
+//		newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+		patterns.clear();
+		patterns.addAll(newPatterns);
+		//去重
+//		patterns = getPossiblePatternsCompareToSelf(patterns);
+		
+	}
 	public void getPossiblePatternsFormThreeInN(List<Pattern> patterns){
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
@@ -444,7 +637,7 @@ public class GetAllPatternsUtil
 							continue;
 						}
 					   pattern = new Pattern();
-					   pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue());
+					   pattern.setValue(value);
 					   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName());
 					   code1 = patterns.get(i).getFormatCode();
 					   code2 = patterns.get(j).getFormatCode();
@@ -472,7 +665,54 @@ public class GetAllPatternsUtil
 		
 	}
 	
-	
+	public int  getMaxValue(int ...value){
+		int maxValue = 0;
+		for (int v : value)
+		{
+			if(v>maxValue){
+				maxValue = v;
+			}
+		}
+		return maxValue;
+	}
+	public void getPossiblePatternsFromTwoInN52(List<Pattern> patterns){
+		List<Pattern> newPatterns = new ArrayList<>();
+		Pattern pattern = null;
+		int i,j= 0 ;
+		int code1,code2,codeNew=0;
+//		int numPerCard = cardHeight*cardWidth;
+		String patternNew = "";
+		for(i=0;i<patterns.size();i++){
+			for(j=i+1;j<patterns.size();j++){
+				int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue());
+				if(value >maxPrizeValue) {
+					continue;
+				}
+				pattern = new Pattern();
+				pattern.setValue(value);
+				pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
+				code1 = patterns.get(i).getFormatCode();
+				code2 = patterns.get(j).getFormatCode();
+				codeNew = code1 | code2;
+				patternNew = Integer.toBinaryString(codeNew);
+				if(patternNew.length()< numPerCard){
+					patternNew = "00000"+patternNew;
+				}
+				pattern.setFormat(patternNew);
+				pattern.setFormatCode(codeNew);
+				pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
+				newPatterns.add(pattern);
+				//去重 避免Heap内存溢出
+//				newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+			}
+		}
+		//去重
+//		newPatterns = getPossiblePatternsCompareToSelf(newPatterns);
+		
+		patterns.addAll(newPatterns);
+		//去重
+//		patterns = getPossiblePatternsCompareToSelf(patterns);
+	}
 	public void getPossiblePatternsFromTwoInN(List<Pattern> patterns){
 	   List<Pattern> newPatterns = new ArrayList<>();
 	   Pattern pattern = null;
@@ -487,7 +727,7 @@ public class GetAllPatternsUtil
 					continue;
 				}
 			   pattern = new Pattern();
-			   pattern.setValue(patterns.get(i).getValue()+patterns.get(j).getValue());
+			   pattern.setValue(value);
 			   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
 			   code1 = patterns.get(i).getFormatCode();
 			   code2 = patterns.get(j).getFormatCode();
@@ -565,7 +805,7 @@ public class GetAllPatternsUtil
 		//gameId:51
 //		getTurboManiaPatternsNew(getAllPatternsUtil,51,"turboMania.json");
 		//gameId:52
-//		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json");
+		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json");
 		//gameId:54
 //		getHotBingoPatternsNew(getAllPatternsUtil,54,"hotBingo.json");
 		//gameId:55
@@ -598,8 +838,41 @@ public class GetAllPatternsUtil
 
 	private static void getVipBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
 	{
-		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		JsonRootBean jsonRoot = getAllPossiblePatterns52(getAllPatternsUtil,gameId,fileName);
+		getAllGamesPossiblePatternsNew52(getAllPatternsUtil, gameId, fileName, jsonRoot);
+	}
+
+	private static JsonRootBean getAllPossiblePatterns52(GetAllPatternsUtil getAllPatternsUtil, int gameId,
+			String fileName)
+	{
+		//2/12
+		List<Pattern> patterns = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns);
+		getAllPatternsUtil.getPossiblePatternsFromTwoInN52(patterns);
+		//3/12
+		List<Pattern> patterns2 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns2);
+		getAllPatternsUtil.getPossiblePatternsFormThreeInN52(patterns2);
+		//4/12
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns3);
+		getAllPatternsUtil.getPossiblePatternsFromFourInN52(patterns3);
+		//5/12
+		List<Pattern> patterns4 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns4);
+		getAllPatternsUtil.getPossiblePatternsFromFiveInN52(patterns4);
+		//6/12
+		List<Pattern> patterns5 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns5);
+		getAllPatternsUtil.getPossiblePatternsFromSixInN52(patterns5);
+		//
+		patterns.addAll(patterns2);
+		patterns.addAll(patterns3);
+		patterns.addAll(patterns4);
+		patterns.addAll(patterns5);
+		//rounstastics
+		getAllPatternsUtil.jsonRootBean.setPattern(patterns);
+		return getAllPatternsUtil.jsonRootBean;
 	}
 
 	private static void getTurboManiaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
@@ -730,6 +1003,48 @@ public class GetAllPatternsUtil
 		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
 	}
 
+	public static void getAllGamesPossiblePatternsNew52(GetAllPatternsUtil getAllPatternsUtil, int gameId,
+			String fileName, JsonRootBean jsonRoot)
+	{
+		//去重
+//		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
+		List<Pattern> possiblePatterns = jsonRoot.getPattern();
+		//去重
+//		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
+		//去bingo
+		possiblePatterns = filterMoreThanOneBingo(possiblePatterns);
+		//add defalut bingo pattern
+		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
+		getAllPatternsUtil.initPatterns(patterns3);
+		possiblePatterns.add(patterns3.get(0));
+		//按照value从大到小重新排序
+		Collections.sort(possiblePatterns);
+		//别名重定义
+		int a = 0;
+		for (Pattern pattern : possiblePatterns)
+		{
+			pattern.setAlias("P"+a);
+			a++;
+		}
+		jsonRoot.setPattern(possiblePatterns);
+//		System.out.println(jsonRoot.toString());
+		WriteStringToFile2(jsonRoot.toString(),"./config/vipBingoBackUp.txt");
+	}
+	
+	 public static void WriteStringToFile2(String file,String filePath) {
+	        try {
+	            FileWriter fw = new FileWriter(filePath, true);
+	            BufferedWriter bw = new BufferedWriter(fw);
+	            bw.append(file);
+//	            bw.write("abc\r\n ");// 往已有的文件上添加字符串
+	            bw.close();
+	            fw.close();
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	    }
+
 	public static void getAllGamesPossiblePatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId,
 			String fileName, JsonRootBean jsonRoot)
 	{
@@ -741,6 +1056,8 @@ public class GetAllPatternsUtil
 		possiblePatterns.addAll(patterns3);
 		//去重
 		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
+		//去bingo
+//		possiblePatterns = filterMoreThanOneBingo(possiblePatterns);
 		//按照value从大到小重新排序
 		Collections.sort(possiblePatterns);
 		//别名重定义
@@ -752,6 +1069,19 @@ public class GetAllPatternsUtil
 		}
 		jsonRoot.setPattern(possiblePatterns);
 		System.out.println(jsonRoot.toString());
+	}
+
+	private static List<Pattern> filterMoreThanOneBingo(List<Pattern> possiblePatterns)
+	{
+		ArrayList<Pattern> delPatterns = new ArrayList<Pattern>();
+		for (Pattern pattern : possiblePatterns)
+		{
+			if("111111111111111".equals(pattern.getFormat())){
+				delPatterns.add(pattern);
+			}
+		}
+		possiblePatterns.removeAll(delPatterns);
+		return possiblePatterns;
 	}
 
 	private static JsonRootBean getAllPossiblePatterns21(GetAllPatternsUtil getAllPatternsUtil, int gameId,
