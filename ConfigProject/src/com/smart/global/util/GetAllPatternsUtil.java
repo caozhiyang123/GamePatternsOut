@@ -96,6 +96,23 @@ public class GetAllPatternsUtil
 		return newPatternsList;
 		
 	}
+	//去重
+	public List<Pattern> getPossiblePatternsCompareToSelf3(List<Pattern> patterns,List<Pattern> defaultPatterns){
+		ArrayList<Pattern> delPattern = new ArrayList<Pattern>();
+		for (Pattern defaultPattern : defaultPatterns)
+		{
+			for (Pattern pattern : patterns)
+			{
+				if(pattern.getFormatCode() == defaultPattern.getFormatCode()){
+					delPattern.add(pattern);
+				}
+			}
+		}
+		patterns.removeAll(delPattern);
+		patterns.addAll(defaultPatterns);
+		return patterns;
+		
+	}
 
 	private void getPossiblePatternsFromNineInN(List<Pattern> patterns) {
 		List<Pattern> newPatterns = new ArrayList<>();
@@ -775,7 +792,7 @@ public class GetAllPatternsUtil
 		//gameId:29
 //		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json");
 		//gameId:41
-//		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
+		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
 		//gameId:61
 //		getPachinko2PatternsNew(getAllPatternsUtil,61,"pachinko2.json");
 		//gameId:20
@@ -805,7 +822,7 @@ public class GetAllPatternsUtil
 		//gameId:51
 //		getTurboManiaPatternsNew(getAllPatternsUtil,51,"turboMania.json");
 		//gameId:52
-		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json");
+//		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json");
 		//gameId:54
 //		getHotBingoPatternsNew(getAllPatternsUtil,54,"hotBingo.json");
 		//gameId:55
@@ -1013,10 +1030,12 @@ public class GetAllPatternsUtil
 //		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
 		//去bingo
 		possiblePatterns = filterMoreThanOneBingo(possiblePatterns);
-		//add defalut bingo pattern
+		//add defalut pattern
 		List<Pattern> patterns3 = getAllPatternsUtil.getPatterns(gameId,fileName);
 		getAllPatternsUtil.initPatterns(patterns3);
-		possiblePatterns.add(patterns3.get(0));
+		//去重
+		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf3(possiblePatterns,patterns3);
+//		possiblePatterns.add(patterns3.get(0));
 		//按照value从大到小重新排序
 		Collections.sort(possiblePatterns);
 		//别名重定义
@@ -1068,7 +1087,8 @@ public class GetAllPatternsUtil
 			a++;
 		}
 		jsonRoot.setPattern(possiblePatterns);
-		System.out.println(jsonRoot.toString());
+//		System.out.println(jsonRoot.toString());
+		WriteStringToFile2(jsonRoot.toString(),"./config/Pachinko3backup.txt");
 	}
 
 	private static List<Pattern> filterMoreThanOneBingo(List<Pattern> possiblePatterns)
