@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import com.besjon.pojo.JsonRootBean;
 import com.besjon.pojo.Pattern;
@@ -118,7 +121,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p,q ,r= 0 ;
-		int code1,code2,code3,code4,code5,code6,code7,code8,code9,codeNew=0;
+		int code1,code2,code3,code4,code5,code6,code7,code8,code9;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -134,13 +137,9 @@ public class GetAllPatternsUtil
 								for(p=n+1;p<size;p++) {
 									for(q=p+1;q<size;q++) {
 										for(r=q+1;r<size;r++) {
-											int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue()+patterns.get(r).getValue();
-											if(value >maxPrizeValue) {
-												continue;
-											}
-											pattern = new Pattern();
-											pattern.setValue(value);
-											pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName()+"+"+patterns.get(r).getName());
+											int codeNew=0;
+											//------------------when add a pattern to judge whether the former contains the latter----------------
+											List<Integer> delCode = new ArrayList<Integer>();
 											code1 = patterns.get(i).getFormatCode();
 											code2 = patterns.get(j).getFormatCode();
 											code3 = patterns.get(k).getFormatCode();
@@ -150,11 +149,70 @@ public class GetAllPatternsUtil
 											code7 = patterns.get(p).getFormatCode();
 											code8 = patterns.get(q).getFormatCode();
 											code9 = patterns.get(r).getFormatCode();
-											codeNew = code1 | code2 | code3 |code4 |code5 |code6 |code7 |code8 |code9;
-											patternNew = Integer.toBinaryString(codeNew);
-											if(patternNew.length()< numPerCard){
-												patternNew = "00000"+patternNew;
+											Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+											allPatternsCodeMap.put(code1, i);
+											allPatternsCodeMap.put(code2, j);
+											allPatternsCodeMap.put(code3, k);
+											allPatternsCodeMap.put(code4, L);
+											allPatternsCodeMap.put(code5, m);
+											allPatternsCodeMap.put(code6, n);
+											allPatternsCodeMap.put(code7, p);
+											allPatternsCodeMap.put(code8, q);
+											allPatternsCodeMap.put(code9, r);
+											
+											List<Integer> allCodesList = new ArrayList<Integer>();
+											allCodesList.add(code1);
+											allCodesList.add(code2);
+											allCodesList.add(code3);
+											allCodesList.add(code4);
+											allCodesList.add(code5);
+											allCodesList.add(code6);
+											allCodesList.add(code7);
+											allCodesList.add(code8);
+											allCodesList.add(code9);
+											
+											for (int w = 1; w < allCodesList.size(); w++)
+											{
+												if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+													delCode.add(allCodesList.get(w));
+													allPatternsCodeMap.remove(allCodesList.get(w));
+												}
 											}
+											allCodesList.removeAll(delCode);
+										   for (Integer code : allCodesList)
+											{
+											   codeNew |= code;
+											}
+										   //------------------when add a pattern to judge whether the former contains the latter----------------
+										   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+										   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+										   needToAddPatternindexs.addAll(needToAddPatternNums);
+										   int valueSum = 0;
+										   for (Integer index : needToAddPatternindexs)
+											{
+											   valueSum += patterns.get(index).getValue();
+											}
+										   if(valueSum >= maxPrizeValue){
+											   continue;
+										   }
+										   String nameAdd = "";
+										   for (Integer index : needToAddPatternindexs)
+											{
+											   nameAdd += patterns.get(index).getName()+"+";
+											}
+											
+											pattern = new Pattern();
+											pattern.setValue(valueSum);
+											pattern.setName(nameAdd);
+											patternNew = Integer.toBinaryString(codeNew);
+											 if(patternNew.length()< numPerCard){
+												   int len = numPerCard-patternNew.length();
+												   String str = "";
+												   for(int z =0;z<len;z++){
+													   str += "0";
+												   }
+												   patternNew = str+patternNew;
+											   }
 											pattern.setFormat(patternNew);
 											pattern.setFormatCode(codeNew);
 											pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -181,7 +239,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p,q = 0 ;
-		int code1,code2,code3,code4,code5,code6,code7,code8,codeNew=0;
+		int code1,code2,code3,code4,code5,code6,code7,code8;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -196,13 +254,9 @@ public class GetAllPatternsUtil
 							for(n=m+1;n<size;n++) {
 								for(p=n+1;p<size;p++) {
 									for(q=p+1;q<size;q++) {
-										int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue()+patterns.get(q).getValue();
-										if(value >maxPrizeValue) {
-											continue;
-										}
-										pattern = new Pattern();
-										pattern.setValue(value);
-										pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName()+"+"+patterns.get(q).getName());
+										int codeNew=0;
+										//------------------when add a pattern to judge whether the former contains the latter----------------
+										List<Integer> delCode = new ArrayList<Integer>();
 										code1 = patterns.get(i).getFormatCode();
 										code2 = patterns.get(j).getFormatCode();
 										code3 = patterns.get(k).getFormatCode();
@@ -211,11 +265,66 @@ public class GetAllPatternsUtil
 										code6 = patterns.get(n).getFormatCode();
 										code7 = patterns.get(p).getFormatCode();
 										code8 = patterns.get(q).getFormatCode();
-										codeNew = code1 | code2 | code3 |code4 |code5 |code6 |code7 |code8;
-										patternNew = Integer.toBinaryString(codeNew);
-										if(patternNew.length()< numPerCard){
-											patternNew = "00000"+patternNew;
+										Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+										allPatternsCodeMap.put(code1, i);
+										allPatternsCodeMap.put(code2, j);
+										allPatternsCodeMap.put(code3, k);
+										allPatternsCodeMap.put(code4, L);
+										allPatternsCodeMap.put(code5, m);
+										allPatternsCodeMap.put(code6, n);
+										allPatternsCodeMap.put(code7, p);
+										allPatternsCodeMap.put(code8, q);
+										
+										List<Integer> allCodesList = new ArrayList<Integer>();
+										allCodesList.add(code1);
+										allCodesList.add(code2);
+										allCodesList.add(code3);
+										allCodesList.add(code4);
+										allCodesList.add(code5);
+										allCodesList.add(code6);
+										allCodesList.add(code7);
+										allCodesList.add(code8);
+										
+										for (int w = 1; w < allCodesList.size(); w++)
+										{
+											if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+												delCode.add(allCodesList.get(w));
+												allPatternsCodeMap.remove(allCodesList.get(w));
+											}
 										}
+										allCodesList.removeAll(delCode);
+									   for (Integer code : allCodesList)
+										{
+										   codeNew |= code;
+										}
+									   //------------------when add a pattern to judge whether the former contains the latter----------------
+									   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+									   int valueSum = 0;
+									   for (Integer index : needToAddPatternNums)
+										{
+										   valueSum += patterns.get(index).getValue();
+										}
+									   if(valueSum >= maxPrizeValue){
+										   continue;
+									   }
+									   String nameAdd = "";
+									   for (Integer index : needToAddPatternNums)
+										{
+										   nameAdd += patterns.get(index).getName()+"+";
+										}
+										
+										pattern = new Pattern();
+										pattern.setValue(valueSum);
+										pattern.setName(nameAdd);
+										patternNew = Integer.toBinaryString(codeNew);
+										 if(patternNew.length()< numPerCard){
+											   int len = numPerCard-patternNew.length();
+											   String str = "";
+											   for(int z =0;z<len;z++){
+												   str += "0";
+											   }
+											   patternNew = str+patternNew;
+										   }
 										pattern.setFormat(patternNew);
 										pattern.setFormatCode(codeNew);
 										pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -243,7 +352,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p = 0 ;
-		int code1,code2,code3,code4,code5,code6,code7 ,codeNew=0;
+		int code1,code2,code3,code4,code5,code6,code7 ;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -257,14 +366,9 @@ public class GetAllPatternsUtil
 						for( m=L+1;m<size;m++) {
 							for( n=m+1;n<size;n++) {
 								for( p=n+1;p<size;p++) {
-									int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue()+patterns.get(p).getValue();
-									if(value >maxPrizeValue) {
-										continue;
-									}
-									//去重
-									pattern = new Pattern();
-									pattern.setValue(value);
-									pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName()+"+"+patterns.get(p).getName());
+									int codeNew=0;
+									//------------------when add a pattern to judge whether the former contains the latter----------------
+									List<Integer> delCode = new ArrayList<Integer>();
 									code1 = patterns.get(i).getFormatCode();
 									code2 = patterns.get(j).getFormatCode();
 									code3 = patterns.get(k).getFormatCode();
@@ -272,11 +376,67 @@ public class GetAllPatternsUtil
 									code5 = patterns.get(m).getFormatCode();
 									code6 = patterns.get(n).getFormatCode();
 									code7 = patterns.get(p).getFormatCode();
-									codeNew = code1 | code2 | code3 |code4 |code5 |code6 |code7;
-									patternNew = Integer.toBinaryString(codeNew);
-									if(patternNew.length()< numPerCard){
-										patternNew = "00000"+patternNew;
+									Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+									allPatternsCodeMap.put(code1, i);
+									allPatternsCodeMap.put(code2, j);
+									allPatternsCodeMap.put(code3, k);
+									allPatternsCodeMap.put(code4, L);
+									allPatternsCodeMap.put(code5, m);
+									allPatternsCodeMap.put(code6, n);
+									allPatternsCodeMap.put(code7, p);
+									
+									List<Integer> allCodesList = new ArrayList<Integer>();
+									allCodesList.add(code1);
+									allCodesList.add(code2);
+									allCodesList.add(code3);
+									allCodesList.add(code4);
+									allCodesList.add(code5);
+									allCodesList.add(code6);
+									allCodesList.add(code7);
+									
+									for (int w = 1; w < allCodesList.size(); w++)
+									{
+										if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+											delCode.add(allCodesList.get(w));
+											allPatternsCodeMap.remove(allCodesList.get(w));
+										}
 									}
+									allCodesList.removeAll(delCode);
+								   for (Integer code : allCodesList)
+									{
+									   codeNew |= code;
+									}
+								   //------------------when add a pattern to judge whether the former contains the latter----------------
+								   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+								   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+								   needToAddPatternindexs.addAll(needToAddPatternNums);
+								   int valueSum = 0;
+								   for (Integer index : needToAddPatternindexs)
+									{
+									   valueSum += patterns.get(index).getValue();
+									}
+								   if(valueSum>=maxPrizeValue){
+									   continue;
+								   }
+								   String nameAdd = "";
+								   for (Integer index : needToAddPatternindexs)
+									{
+									   nameAdd += patterns.get(index).getName()+"+";
+									}
+									
+									//去重
+									pattern = new Pattern();
+									pattern.setValue(valueSum);
+									pattern.setName(nameAdd);
+									patternNew = Integer.toBinaryString(codeNew);
+									 if(patternNew.length()< numPerCard){
+										   int len = numPerCard-patternNew.length();
+										   String str = "";
+										   for(int z =0;z<len;z++){
+											   str += "0";
+										   }
+										   patternNew = str+patternNew;
+									   }
 									pattern.setFormat(patternNew);
 									pattern.setFormatCode(codeNew);
 									pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -302,7 +462,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p = 0 ;
-		int code1,code2,code3,code4,code5,code6,code7 ,codeNew=0;
+		int code1,code2,code3,code4,code5,code6,code7;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -315,24 +475,67 @@ public class GetAllPatternsUtil
 					for(L=k+1;L<size;L++) {
 						for(m=L+1;m<size;m++) {
 							for(n=m+1;n<size;n++) {
-								int value = getMaxValue( patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue(),patterns.get(m).getValue(),patterns.get(n).getValue());
-								if(value >maxPrizeValue) {
-									continue;
-								}
-								pattern = new Pattern();
-								pattern.setValue(value);
-								pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName());
+								int codeNew=0;
+								int maxValue = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue(),patterns.get(m).getValue(),patterns.get(n).getValue());
+								//------------------when add a pattern to judge whether the former contains the latter----------------
+								List<Integer> delCode = new ArrayList<Integer>();
 								code1 = patterns.get(i).getFormatCode();
 								code2 = patterns.get(j).getFormatCode();
 								code3 = patterns.get(k).getFormatCode();
 								code4 = patterns.get(L).getFormatCode();
 								code5 = patterns.get(m).getFormatCode();
 								code6 = patterns.get(n).getFormatCode();
-								codeNew = code1 | code2 | code3 |code4 |code5 |code6;
-								patternNew = Integer.toBinaryString(codeNew);
-								if(patternNew.length()< numPerCard){
-									patternNew = "00000"+patternNew;
+								Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+								allPatternsCodeMap.put(code1, i);
+								allPatternsCodeMap.put(code2, j);
+								allPatternsCodeMap.put(code3, k);
+								allPatternsCodeMap.put(code4, L);
+								allPatternsCodeMap.put(code5, m);
+								allPatternsCodeMap.put(code6, n);
+								
+								List<Integer> allCodesList = new ArrayList<Integer>();
+								allCodesList.add(code1);
+								allCodesList.add(code2);
+								allCodesList.add(code3);
+								allCodesList.add(code4);
+								allCodesList.add(code5);
+								allCodesList.add(code6);
+								
+								for (int w = 1; w < allCodesList.size(); w++)
+								{
+									if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+										delCode.add(allCodesList.get(w));
+										allPatternsCodeMap.remove(allCodesList.get(w));
+									}
 								}
+								allCodesList.removeAll(delCode);
+							   for (Integer code : allCodesList)
+								{
+								   codeNew |= code;
+								}
+							   //------------------when add a pattern to judge whether the former contains the latter----------------
+							   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+							   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+							   needToAddPatternindexs.addAll(needToAddPatternNums);
+							   Collections.sort(needToAddPatternindexs);
+							   
+							   String nameAdd = "";
+							   for (Integer index : needToAddPatternindexs)
+								{
+								   nameAdd += patterns.get(index).getName()+"+";
+								}
+								pattern = new Pattern();
+								pattern.setValue(maxValue);
+								pattern.setName(nameAdd);
+								patternNew = Integer.toBinaryString(codeNew);
+								 if(patternNew.length()< numPerCard){
+									   int len = numPerCard-patternNew.length();
+									   String str = "";
+									   for(int z =0;z<len;z++){
+										   str += "0";
+									   }
+									   patternNew = str+patternNew;
+								   }
 								pattern.setFormat(patternNew);
 								pattern.setFormatCode(codeNew);
 								pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -356,7 +559,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m,n,p = 0 ;
-		int code1,code2,code3,code4,code5,code6,code7 ,codeNew=0;
+		int code1,code2,code3,code4,code5,code6,code7 ;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -369,24 +572,74 @@ public class GetAllPatternsUtil
 					for(L=k+1;L<size;L++) {
 						for(m=L+1;m<size;m++) {
 							for(n=m+1;n<size;n++) {
-								int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue()+patterns.get(n).getValue();
-								if(value >maxPrizeValue) {
-									continue;
-								}
-								pattern = new Pattern();
-								pattern.setValue(value);
-								pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName()+"+"+patterns.get(n).getName());
+								int codeNew=0;
+								//------------------when add a pattern to judge whether the former contains the latter----------------
+								List<Integer> delCode = new ArrayList<Integer>();
 								code1 = patterns.get(i).getFormatCode();
 								code2 = patterns.get(j).getFormatCode();
 								code3 = patterns.get(k).getFormatCode();
 								code4 = patterns.get(L).getFormatCode();
 								code5 = patterns.get(m).getFormatCode();
 								code6 = patterns.get(n).getFormatCode();
-								codeNew = code1 | code2 | code3 |code4 |code5 |code6;
-								patternNew = Integer.toBinaryString(codeNew);
-								if(patternNew.length()< numPerCard){
-									patternNew = "00000"+patternNew;
+								Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+								allPatternsCodeMap.put(code1, i);
+								allPatternsCodeMap.put(code2, j);
+								allPatternsCodeMap.put(code3, k);
+								allPatternsCodeMap.put(code4, L);
+								allPatternsCodeMap.put(code5, m);
+								allPatternsCodeMap.put(code6, n);
+								
+								List<Integer> allCodesList = new ArrayList<Integer>();
+								allCodesList.add(code1);
+								allCodesList.add(code2);
+								allCodesList.add(code3);
+								allCodesList.add(code4);
+								allCodesList.add(code5);
+								allCodesList.add(code6);
+								
+								for (int w = 1; w < allCodesList.size(); w++)
+								{
+									if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+										delCode.add(allCodesList.get(w));
+										allPatternsCodeMap.remove(allCodesList.get(w));
+									}
 								}
+								allCodesList.removeAll(delCode);
+							   for (Integer code : allCodesList)
+								{
+								   codeNew |= code;
+								}
+							   //------------------when add a pattern to judge whether the former contains the latter----------------
+							   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+							   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+							   needToAddPatternindexs.addAll(needToAddPatternNums);
+							   Collections.sort(needToAddPatternindexs);
+							   int valueSum = 0;
+							   for (Integer index : needToAddPatternindexs)
+								{
+								   valueSum += patterns.get(index).getValue();
+								}
+							   if(valueSum>=maxPrizeValue){
+								   continue;
+							   }
+							   String nameAdd = "";
+							   for (Integer index : needToAddPatternindexs)
+								{
+								   nameAdd += patterns.get(index).getName()+"+";
+								}
+							   
+								pattern = new Pattern();
+								pattern.setValue(valueSum);
+								pattern.setName(nameAdd);
+								patternNew = Integer.toBinaryString(codeNew);
+								 if(patternNew.length()< numPerCard){
+									   int len = numPerCard-patternNew.length();
+									   String str = "";
+									   for(int z =0;z<len;z++){
+										   str += "0";
+									   }
+									   patternNew = str+patternNew;
+								   }
 								pattern.setFormat(patternNew);
 								pattern.setFormatCode(codeNew);
 								pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -410,7 +663,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m= 0 ;
-		int code1,code2,code3,code4,code5,codeNew=0;
+		int code1,code2,code3,code4,code5;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -419,23 +672,65 @@ public class GetAllPatternsUtil
 				for( k = j+1;k<size;k++){
 					for(L=k+1;L<size;L++) {
 						for(m=L+1;m<size;m++) {
-							int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue(),patterns.get(m).getValue());
-							if(value >maxPrizeValue) {
-								continue;
-							}
-							pattern = new Pattern();
-							pattern.setValue(value);
-							pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName());
+							int codeNew=0;
+							int maxValue = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue(),patterns.get(m).getValue());
+							//------------------when add a pattern to judge whether the former contains the latter----------------
+							List<Integer> delCode = new ArrayList<Integer>();
 							code1 = patterns.get(i).getFormatCode();
 							code2 = patterns.get(j).getFormatCode();
 							code3 = patterns.get(k).getFormatCode();
 							code4 = patterns.get(L).getFormatCode();
 							code5 = patterns.get(m).getFormatCode();
-							codeNew = code1 | code2 | code3 |code4 |code5;
-							patternNew = Integer.toBinaryString(codeNew);
-							if(patternNew.length()< numPerCard){
-								patternNew = "00000"+patternNew;
+							Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+							allPatternsCodeMap.put(code1, i);
+							allPatternsCodeMap.put(code2, j);
+							allPatternsCodeMap.put(code3, k);
+							allPatternsCodeMap.put(code4, L);
+							allPatternsCodeMap.put(code5, m);
+							
+							List<Integer> allCodesList = new ArrayList<Integer>();
+							allCodesList.add(code1);
+							allCodesList.add(code2);
+							allCodesList.add(code3);
+							allCodesList.add(code4);
+							allCodesList.add(code5);
+							
+							for (int w = 1; w < allCodesList.size(); w++)
+							{
+								if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+									delCode.add(allCodesList.get(w));
+									allPatternsCodeMap.remove(allCodesList.get(w));
+								}
 							}
+							allCodesList.removeAll(delCode);
+						   for (Integer code : allCodesList)
+							{
+							   codeNew |= code;
+							}
+						   //------------------when add a pattern to judge whether the former contains the latter----------------
+						   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+						   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+						   needToAddPatternindexs.addAll(needToAddPatternNums);
+						   Collections.sort(needToAddPatternindexs);
+						   
+						   String nameAdd = "";
+						   for (Integer index : needToAddPatternindexs)
+							{
+							   nameAdd += patterns.get(index).getName()+"+";
+							}
+						   
+							pattern = new Pattern();
+							pattern.setValue(maxValue);
+							pattern.setName(nameAdd);
+							patternNew = Integer.toBinaryString(codeNew);
+							 if(patternNew.length()< numPerCard){
+								   int len = numPerCard-patternNew.length();
+								   String str = "";
+								   for(int z =0;z<len;z++){
+									   str += "0";
+								   }
+								   patternNew = str+patternNew;
+							   }
 							pattern.setFormat(patternNew);
 							pattern.setFormatCode(codeNew);
 							pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -459,7 +754,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k,L,m= 0 ;
-		int code1,code2,code3,code4,code5,codeNew=0;
+		int code1,code2,code3,code4,code5;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -468,23 +763,71 @@ public class GetAllPatternsUtil
 				for( k = j+1;k<size;k++){
 					for(L=k+1;L<size;L++) {
 						for(m=L+1;m<size;m++) {
-							int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue()+patterns.get(m).getValue();
-							if(value >maxPrizeValue) {
-								continue;
-							}
-							pattern = new Pattern();
-							pattern.setValue(value);
-							pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName()+"+"+patterns.get(m).getName());
+							int codeNew=0;
+							//------------------when add a pattern to judge whether the former contains the latter----------------
+							List<Integer> delCode = new ArrayList<Integer>();
 							code1 = patterns.get(i).getFormatCode();
 							code2 = patterns.get(j).getFormatCode();
 							code3 = patterns.get(k).getFormatCode();
 							code4 = patterns.get(L).getFormatCode();
 							code5 = patterns.get(m).getFormatCode();
-							codeNew = code1 | code2 | code3 |code4 |code5;
-							patternNew = Integer.toBinaryString(codeNew);
-							if(patternNew.length()< numPerCard){
-								patternNew = "00000"+patternNew;
+							Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+							allPatternsCodeMap.put(code1, i);
+							allPatternsCodeMap.put(code2, j);
+							allPatternsCodeMap.put(code3, k);
+							allPatternsCodeMap.put(code4, L);
+							allPatternsCodeMap.put(code5, m);
+							
+							List<Integer> allCodesList = new ArrayList<Integer>();
+							allCodesList.add(code1);
+							allCodesList.add(code2);
+							allCodesList.add(code3);
+							allCodesList.add(code4);
+							allCodesList.add(code5);
+							
+							for (int w = 1; w < allCodesList.size(); w++)
+							{
+								if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+									delCode.add(allCodesList.get(w));
+									allPatternsCodeMap.remove(allCodesList.get(w));
+								}
 							}
+							allCodesList.removeAll(delCode);
+						   for (Integer code : allCodesList)
+							{
+							   codeNew |= code;
+							}
+						   //------------------when add a pattern to judge whether the former contains the latter----------------
+						   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+						   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+						   needToAddPatternindexs.addAll(needToAddPatternNums);
+						   Collections.sort(needToAddPatternindexs);
+						   int valueSum = 0;
+						   for (Integer index : needToAddPatternindexs)
+							{
+							   valueSum += patterns.get(index).getValue();
+							}
+						   if(valueSum>=maxPrizeValue){
+							   continue;
+						   }
+						   String nameAdd = "";
+						   for (Integer index : needToAddPatternindexs)
+							{
+							   nameAdd += patterns.get(index).getName()+"+";
+							}
+						   
+							pattern = new Pattern();
+							pattern.setValue(valueSum);
+							pattern.setName(nameAdd);
+							patternNew = Integer.toBinaryString(codeNew);
+							 if(patternNew.length()< numPerCard){
+								   int len = numPerCard-patternNew.length();
+								   String str = "";
+								   for(int z =0;z<len;z++){
+									   str += "0";
+								   }
+								   patternNew = str+patternNew;
+							   }
 							pattern.setFormat(patternNew);
 							pattern.setFormatCode(codeNew);
 							pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -508,7 +851,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null; 
 		int i,j,k,L = 0 ;
-		int code1,code2,code3,code4 ,codeNew=0;
+		int code1,code2,code3,code4 ;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -516,22 +859,62 @@ public class GetAllPatternsUtil
 			for(j=i+1;j<size;j++){
 				for(k = j+1;k<size;k++){
 					for(L=k+1;L< size;L++) {
-						int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue());
-						if(value >maxPrizeValue) {
-							continue;
-						}
-						pattern = new Pattern();
-						pattern.setValue(value);
-						pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName());
+						int codeNew=0;
+						int maxValue = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue(),patterns.get(L).getValue());
+						//------------------when add a pattern to judge whether the former contains the latter----------------
+						List<Integer> delCode = new ArrayList<Integer>();
 						code1 = patterns.get(i).getFormatCode();
-						code2 = patterns.get(j).getFormatCode();
-						code3 = patterns.get(k).getFormatCode();
-						code4 = patterns.get(L).getFormatCode();
-						codeNew = code1 | code2 | code3 |code4;
-						patternNew = Integer.toBinaryString(codeNew);
-						if(patternNew.length()<numPerCard){
-							patternNew = "00000"+patternNew;
+					    code2 = patterns.get(j).getFormatCode();
+					    code3 = patterns.get(k).getFormatCode();
+					    code4 = patterns.get(L).getFormatCode();
+						Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+						allPatternsCodeMap.put(code1, i);
+						allPatternsCodeMap.put(code2, j);
+						allPatternsCodeMap.put(code3, k);
+						allPatternsCodeMap.put(code4, L);
+						
+						List<Integer> allCodesList = new ArrayList<Integer>();
+						allCodesList.add(code1);
+						allCodesList.add(code2);
+						allCodesList.add(code3);
+						allCodesList.add(code4);
+						
+						for (int w = 1; w < allCodesList.size(); w++)
+						{
+							if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+								delCode.add(allCodesList.get(w));
+								allPatternsCodeMap.remove(allCodesList.get(w));
+							}
 						}
+						allCodesList.removeAll(delCode);
+					   for (Integer code : allCodesList)
+						{
+						   codeNew |= code;
+						}
+					   //------------------when add a pattern to judge whether the former contains the latter----------------
+					   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+					   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+					   needToAddPatternindexs.addAll(needToAddPatternNums);
+					   Collections.sort(needToAddPatternindexs);
+					   
+					   String nameAdd = "";
+					   for (Integer index : needToAddPatternindexs)
+						{
+						   nameAdd += patterns.get(index).getName()+"+";
+						}
+					   
+						pattern = new Pattern();
+						pattern.setValue(maxValue);
+						pattern.setName(nameAdd);
+						patternNew = Integer.toBinaryString(codeNew);
+						 if(patternNew.length()< numPerCard){
+							   int len = numPerCard-patternNew.length();
+							   String str = "";
+							   for(int z =0;z<len;z++){
+								   str += "0";
+							   }
+							   patternNew = str+patternNew;
+						   }
 						pattern.setFormat(patternNew);
 						pattern.setFormatCode(codeNew);
 						pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -553,7 +936,7 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null; 
 		int i,j,k,L = 0 ;
-		int code1,code2,code3,code4 ,codeNew=0;
+		int code1,code2,code3,code4 ;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
@@ -561,21 +944,70 @@ public class GetAllPatternsUtil
 			   for(j=i+1;j<size;j++){
 				   for(k = j+1;k<size;k++){
 					   for(L=k+1;L< size;L++) {
-						   int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue()+patterns.get(L).getValue();
-							if(value >maxPrizeValue) {
-								continue;
+						   if((i==1||i==2||i==3||i==4||i==5) && j==6 && k==18 && (L == 30) ){
+							   System.out.println(i);
+						   }
+						   int codeNew=0;
+						 //------------------when add a pattern to judge whether the former contains the latter----------------
+							List<Integer> delCode = new ArrayList<Integer>();
+							code1 = patterns.get(i).getFormatCode();
+						    code2 = patterns.get(j).getFormatCode();
+						    code3 = patterns.get(k).getFormatCode();
+						    code4 = patterns.get(L).getFormatCode();
+							Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+							allPatternsCodeMap.put(code1, i);
+							allPatternsCodeMap.put(code2, j);
+							allPatternsCodeMap.put(code3, k);
+							allPatternsCodeMap.put(code4, L);
+							
+							List<Integer> allCodesList = new ArrayList<Integer>();
+							allCodesList.add(code1);
+							allCodesList.add(code2);
+							allCodesList.add(code3);
+							allCodesList.add(code4);
+							
+							for (int w = 1; w < allCodesList.size(); w++)
+							{
+								if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+									delCode.add(allCodesList.get(w));
+									allPatternsCodeMap.remove(allCodesList.get(w));
+								}
 							}
+							allCodesList.removeAll(delCode);
+						   for (Integer code : allCodesList)
+							{
+							   codeNew |= code;
+							} 
+						   //------------------when add a pattern to judge whether the former contains the latter----------------
+						   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+						   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+						   needToAddPatternindexs.addAll(needToAddPatternNums);
+						   Collections.sort(needToAddPatternindexs);
+						   int valueSum = 0;
+						   for (Integer index : needToAddPatternindexs)
+							{
+							   valueSum += patterns.get(index).getValue();
+							}
+						   if(valueSum>=maxPrizeValue){
+							   continue;
+						   }
+						   String nameAdd = "";
+						   for (Integer index : needToAddPatternindexs)
+							{
+							   nameAdd += patterns.get(index).getName()+"+";
+							}
+						   
 						   pattern = new Pattern();
-						   pattern.setValue(value);
-						   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName()+"+"+patterns.get(L).getName());
-						   code1 = patterns.get(i).getFormatCode();
-						   code2 = patterns.get(j).getFormatCode();
-						   code3 = patterns.get(k).getFormatCode();
-						   code4 = patterns.get(L).getFormatCode();
-						   codeNew = code1 | code2 | code3 |code4;
+						   pattern.setValue(valueSum);
+						   pattern.setName(nameAdd);
 						   patternNew = Integer.toBinaryString(codeNew);
-						   if(patternNew.length()<numPerCard){
-							   patternNew = "00000"+patternNew;
+						   if(patternNew.length()< numPerCard){
+							   int len = numPerCard-patternNew.length();
+							   String str = "";
+							   for(int z =0;z<len;z++){
+								   str += "0";
+							   }
+							   patternNew = str+patternNew;
 						   }
 						   pattern.setFormat(patternNew);
 						   pattern.setFormatCode(codeNew);
@@ -599,28 +1031,65 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k= 0 ;
-		int code1,code2,code3 ,codeNew=0;
+		int code1,code2,code3;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
 			for(j=i+1;j<size;j++){
 				for(k = j+1;k<size;k++){
-					int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue());
-					if(value >maxPrizeValue) {
-						continue;
-					}
-					pattern = new Pattern();
-					pattern.setValue(value);
-					pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName());
+					int codeNew=0;
+					int maxValue = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue(),patterns.get(k).getValue());
+					//------------------when add a pattern to judge whether the former contains the latter----------------
+					List<Integer> delCode = new ArrayList<Integer>();
 					code1 = patterns.get(i).getFormatCode();
 					code2 = patterns.get(j).getFormatCode();
 					code3 = patterns.get(k).getFormatCode();
-					codeNew = code1 | code2 | code3;
-					patternNew = Integer.toBinaryString(codeNew);
-					if(patternNew.length()< numPerCard){
-						patternNew = "00000"+patternNew;
+					Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+					allPatternsCodeMap.put(code1, i);
+					allPatternsCodeMap.put(code2, j);
+					allPatternsCodeMap.put(code3, k);
+					List<Integer> allCodesList = new ArrayList<Integer>();
+					allCodesList.add(code1);
+					allCodesList.add(code2);
+					allCodesList.add(code3);
+					
+					for (int w = 1; w < allCodesList.size();w++)
+					{
+						if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+							delCode.add(allCodesList.get(w));
+							allPatternsCodeMap.remove(allCodesList.get(w));
+						}
 					}
+					allCodesList.removeAll(delCode);
+				   for (Integer code : allCodesList)
+					{
+					   codeNew |= code;
+					}
+				   //------------------when add a pattern to judge whether the former contains the latter----------------
+				   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+				   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+				   needToAddPatternindexs.addAll(needToAddPatternNums);
+				   Collections.sort(needToAddPatternindexs);
+				   
+				   String nameAdd = "";
+				   for (Integer index : needToAddPatternindexs)
+					{
+					   nameAdd += patterns.get(index).getName()+"+";
+					}
+				   
+					pattern = new Pattern();
+					pattern.setValue(maxValue);
+					pattern.setName(nameAdd);
+					patternNew = Integer.toBinaryString(codeNew);
+					 if(patternNew.length()< numPerCard){
+						   int len = numPerCard-patternNew.length();
+						   String str = "";
+						   for(int z =0;z<len;z++){
+							   str += "0";
+						   }
+						   patternNew = str+patternNew;
+					   }
 					pattern.setFormat(patternNew);
 					pattern.setFormatCode(codeNew);
 					pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -642,27 +1111,73 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j,k= 0 ;
-		int code1,code2,code3 ,codeNew=0;
+		int code1,code2,code3;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
 		for(i=0;i<size;i++){
 			   for(j=i+1;j<size;j++){
 				   for(k = j+1;k<size;k++){
-					   int value = patterns.get(i).getValue()+patterns.get(j).getValue()+patterns.get(k).getValue();
-						if(value >maxPrizeValue) {
-							continue;
+					   int codeNew = 0;
+					   if(i==5 && j== 17 && k == 29){
+						   System.out.println(i );
+					   }
+						//------------------when add a pattern to judge whether the former contains the latter----------------
+						List<Integer> delCode = new ArrayList<Integer>();
+						code1 = patterns.get(i).getFormatCode();
+						code2 = patterns.get(j).getFormatCode();
+						code3 = patterns.get(k).getFormatCode();
+						Map<Integer, Integer> allPatternsCodeMap = new TreeMap<Integer,Integer>();
+						allPatternsCodeMap.put(code1, i);
+						allPatternsCodeMap.put(code2, j);
+						allPatternsCodeMap.put(code3, k);
+						List<Integer> allCodesList = new ArrayList<Integer>();
+						allCodesList.add(code1);
+						allCodesList.add(code2);
+						allCodesList.add(code3);
+						
+						for (int w = 1; w< allCodesList.size(); w++)
+						{
+							if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
+								delCode.add(allCodesList.get(w));
+								allPatternsCodeMap.remove(allCodesList.get(w));
+							}
 						}
+						allCodesList.removeAll(delCode);
+					   for (Integer code : allCodesList)
+						{
+						   codeNew |= code;
+						}
+					   //------------------when add a pattern to judge whether the former contains the latter----------------
+					   Collection<Integer> needToAddPatternNums = allPatternsCodeMap.values();
+					   ArrayList<Integer> needToAddPatternindexs = new ArrayList<Integer>();
+					   needToAddPatternindexs.addAll(needToAddPatternNums);
+					   Collections.sort(needToAddPatternindexs);
+					   int valueSum = 0;
+					   for (Integer index : needToAddPatternindexs)
+						{
+						   valueSum += patterns.get(index).getValue();
+						}
+					   if(valueSum>=maxPrizeValue){
+						   continue;
+					   }
+					   String nameAdd = "";
+					   for (Integer index : needToAddPatternindexs)
+						{
+						   nameAdd += patterns.get(index).getName()+"+";
+						}
+					   
 					   pattern = new Pattern();
-					   pattern.setValue(value);
-					   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName()+"+"+patterns.get(k).getName());
-					   code1 = patterns.get(i).getFormatCode();
-					   code2 = patterns.get(j).getFormatCode();
-					   code3 = patterns.get(k).getFormatCode();
-					   codeNew = code1 | code2 | code3;
+					   pattern.setValue(valueSum);
+					   pattern.setName(nameAdd);
 					   patternNew = Integer.toBinaryString(codeNew);
 					   if(patternNew.length()< numPerCard){
-						   patternNew = "00000"+patternNew;
+						   int len = numPerCard-patternNew.length();
+						   String str = "";
+						   for(int z =0;z<len;z++){
+							   str += "0";
+						   }
+						   patternNew = str+patternNew;
 					   }
 					   pattern.setFormat(patternNew);
 					   pattern.setFormatCode(codeNew);
@@ -696,25 +1211,33 @@ public class GetAllPatternsUtil
 		List<Pattern> newPatterns = new ArrayList<>();
 		Pattern pattern = null;
 		int i,j= 0 ;
-		int code1,code2,codeNew=0;
+		int code1,code2;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		for(i=0;i<patterns.size();i++){
 			for(j=i+1;j<patterns.size();j++){
+				int codeNew=0;
 				int value = getMaxValue(patterns.get(i).getValue(),patterns.get(j).getValue());
-				if(value >maxPrizeValue) {
-					continue;
+				
+				code1 = patterns.get(i).getFormatCode();
+				code2 = patterns.get(j).getFormatCode();
+				if(PatternUtil.isMatch3(code1, code2)){
+					   continue;
 				}
+				
 				pattern = new Pattern();
 				pattern.setValue(value);
 				pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
-				code1 = patterns.get(i).getFormatCode();
-				code2 = patterns.get(j).getFormatCode();
 				codeNew = code1 | code2;
 				patternNew = Integer.toBinaryString(codeNew);
-				if(patternNew.length()< numPerCard){
-					patternNew = "00000"+patternNew;
-				}
+				 if(patternNew.length()< numPerCard){
+					   int len = numPerCard-patternNew.length();
+					   String str = "";
+					   for(int z =0;z<len;z++){
+						   str += "0";
+					   }
+					   patternNew = str+patternNew;
+				   }
 				pattern.setFormat(patternNew);
 				pattern.setFormatCode(codeNew);
 				pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
@@ -739,10 +1262,18 @@ public class GetAllPatternsUtil
 		String patternNew = "";
 	   for(i=0;i<patterns.size();i++){
 		   for(j=i+1;j<patterns.size();j++){
+			   if(i==9){
+				   System.out.println(i);
+			   }
 			   int value = patterns.get(i).getValue()+patterns.get(j).getValue();
-				if(value >maxPrizeValue) {
+				if(value >= maxPrizeValue) {
 					continue;
 				}
+			   code1 = patterns.get(i).getFormatCode();
+			   code2 = patterns.get(j).getFormatCode();
+			   if(PatternUtil.isMatch3(code1, code2)){
+				   continue;
+			   }
 			   pattern = new Pattern();
 			   pattern.setValue(value);
 			   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
@@ -751,7 +1282,12 @@ public class GetAllPatternsUtil
 			   codeNew = code1 | code2;
 			   patternNew = Integer.toBinaryString(codeNew);
 			   if(patternNew.length()< numPerCard){
-				   patternNew = "00000"+patternNew;
+				   int len = numPerCard-patternNew.length();
+				   String str = "";
+				   for(int z =0;z<len;z++){
+					   str += "0";
+				   }
+				   patternNew = str+patternNew;
 			   }
 			   pattern.setFormat(patternNew);
 			   pattern.setFormatCode(codeNew);
@@ -790,73 +1326,74 @@ public class GetAllPatternsUtil
 	{
 		GetAllPatternsUtil getAllPatternsUtil = new GetAllPatternsUtil();
 		//gameId:29
-//		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json");
+//		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json","./config/AmericanBackUp.txt");
 		//gameId:41
-		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json");
+//		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json","./config/pachinko3BackUp2.txt");
 		//gameId:61
-//		getPachinko2PatternsNew(getAllPatternsUtil,61,"pachinko2.json");
+//		getPachinko2PatternsNew(getAllPatternsUtil,61,"pachinko2.json","./config/pachinko2BackUp.txt");
 		//gameId:20
-//		getShowBall3PatternsNew(getAllPatternsUtil,20,"showBall3.json");
+//		getShowBall3PatternsNew(getAllPatternsUtil,20,"showBall3.json","./config/showBall3BackUp.txt");
 		//gameId:21
-//		getShowBall2PatternsNew(getAllPatternsUtil,21,"showBall2.json");
+//		getShowBall2PatternsNew(getAllPatternsUtil,21,"showBall2.json","./config/showBall2BackUp.txt");
 		//gameId:22
-//		getShowBall3PatternsNew(getAllPatternsUtil,22,"showBall1.json");
+//		getShowBall3PatternsNew(getAllPatternsUtil,22,"showBall1.json","./config/showBall1BackUp.txt");
 		//gameId:24
-//		getBingo3PatternsNew(getAllPatternsUtil,24,"bingo3.json");
-		//gameId:25
-//		getBlackStarPatternsNew(getAllPatternsUtil,23,"blackStar.json");
+//		getBingo3PatternsNew(getAllPatternsUtil,24,"bingo3.json","./config/bingo3BackUp.txt");
+		//gameId:23
+//		getBlackStarPatternsNew(getAllPatternsUtil,23,"blackStar.json","./config/blackStarBackUp.txt");
+		
 		//gameId:38
-//		getNineBallPatternsNew(getAllPatternsUtil,38,"nineBall.json");
+//		getNineBallPatternsNew(getAllPatternsUtil,38,"nineBall.json","./config/nineBallBackUp.txt");
 		//gameId:39
-//		getTurbo90PatternsNew(getAllPatternsUtil,39,"t90.json");
+//		getTurbo90PatternsNew(getAllPatternsUtil,39,"t90.json","./config/t90BackUp.txt");
 		//gameId:42
-//		getPharaosPatternsNew(getAllPatternsUtil,42,"pharaos.json");
+//		getPharaosPatternsNew(getAllPatternsUtil,42,"pharaos.json","./config/pharaosBackUp.txt");
 		//gameId:45
-//		getDoubleBingoPatternsNew(getAllPatternsUtil,45,"doubleBingo.json");
+//		getDoubleBingoPatternsNew(getAllPatternsUtil,45,"doubleBingo.json","./config/doubleBingoBackUp.txt");
 		//gameId:48
-//		getPraCarambaPatternsNew(getAllPatternsUtil,48,"praCaramba.json");
+//		getPraCarambaPatternsNew(getAllPatternsUtil,48,"praCaramba.json","./config/praCarambaBackUp.txt");
 		//gameId:49
-//		getSilverBallPatternsNew(getAllPatternsUtil,49,"silverBall.json");
+//		getSilverBallPatternsNew(getAllPatternsUtil,49,"silverBall.json","./config/silverBallBackUp.txt");
 		//gameId:50
-//		getAztecBallPatternsNew(getAllPatternsUtil,50,"aztec.json");
+//		getAztecBallPatternsNew(getAllPatternsUtil,50,"aztec.json","./config/aztecBallBackUp.txt");
 		//gameId:51
-//		getTurboManiaPatternsNew(getAllPatternsUtil,51,"turboMania.json");
+//		getTurboManiaPatternsNew(getAllPatternsUtil,51,"turboMania.json","./config/turboManiaBallBackUp.txt");
 		//gameId:52
-//		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json");
+//		getVipBingoPatternsNew(getAllPatternsUtil,52,"vipBingo.json","./config/vipBingoBallBackUp.txt");
 		//gameId:54
-//		getHotBingoPatternsNew(getAllPatternsUtil,54,"hotBingo.json");
+//		getHotBingoPatternsNew(getAllPatternsUtil,54,"hotBingo.json","./config/hotBingoBackUp.txt");
 		//gameId:55
-//		getPraCarambaPatternsNew(getAllPatternsUtil,55,"praCarambaNewEB.json");
+//		getPraCarambaPatternsNew(getAllPatternsUtil,55,"praCarambaNewEB.json","./config/praCarambaNewEBBackUp.txt");
 		//gameId:56
-//		getGoldBallPatternsNew(getAllPatternsUtil,56,"goldBall.json");
+//		getGoldBallPatternsNew(getAllPatternsUtil,56,"goldBall.json","./config/goldBallBackUp.txt");
 		//gameId:57
-//		getTurbo90PatternsNew(getAllPatternsUtil,57,"doubleTurbo90.json");
+//		getTurbo90PatternsNew(getAllPatternsUtil,57,"doubleTurbo90.json","./config/doubleTurbo90BackUp.txt");
 		//gameId:60
-//		getTurbo90PatternsNew(getAllPatternsUtil,60,"turbo90WorldCup.json");
+//		getTurbo90PatternsNew(getAllPatternsUtil,60,"turbo90WorldCup.json","./config/turbo90WorldCupBackUp.txt");
 		//gameId:62
-//		getTurbo90PatternsNew(getAllPatternsUtil,62,"tripleBonus.json");
+//		getTurbo90PatternsNew(getAllPatternsUtil,62,"tripleBonus.json","./config/tripleBonusBackUp.txt");
 		
 		
 	}
 
 	
 
-	private static void getGoldBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getGoldBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getHotBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getHotBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getVipBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getVipBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns52(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew52(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew52(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	private static JsonRootBean getAllPossiblePatterns52(GetAllPatternsUtil getAllPatternsUtil, int gameId,
@@ -892,28 +1429,28 @@ public class GetAllPatternsUtil
 		return getAllPatternsUtil.jsonRootBean;
 	}
 
-	private static void getTurboManiaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getTurboManiaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getAztecBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getAztecBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getSilverBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getSilverBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getPraCarambaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getPraCarambaPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns48(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	private static JsonRootBean getAllPossiblePatterns48(GetAllPatternsUtil getAllPatternsUtil, int gameId,
@@ -949,40 +1486,40 @@ public class GetAllPatternsUtil
 		return getAllPatternsUtil.jsonRootBean;
 	}
 
-	private static void getDoubleBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getDoubleBingoPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getPharaosPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getPharaosPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getTurbo90PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getTurbo90PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getNineBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getNineBallPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getBlackStarPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getBlackStarPatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns24(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
-	private static void getBingo3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getBingo3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns24(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	private static JsonRootBean getAllPossiblePatterns24(GetAllPatternsUtil getAllPatternsUtil, int gameId,
@@ -1008,20 +1545,20 @@ public class GetAllPatternsUtil
 		return getAllPatternsUtil.jsonRootBean;
 	}
 
-	private static void getPachinko2PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName)
+	private static void getPachinko2PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns20(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	
-	private static void getShowBall2PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
+	private static void getShowBall2PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns21(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	public static void getAllGamesPossiblePatternsNew52(GetAllPatternsUtil getAllPatternsUtil, int gameId,
-			String fileName, JsonRootBean jsonRoot)
+			String fileName, JsonRootBean jsonRoot,String dir)
 	{
 		//去重
 //		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
@@ -1047,7 +1584,7 @@ public class GetAllPatternsUtil
 		}
 		jsonRoot.setPattern(possiblePatterns);
 //		System.out.println(jsonRoot.toString());
-		WriteStringToFile2(jsonRoot.toString(),"./config/vipBingoBackUp.txt");
+		WriteStringToFile2(jsonRoot.toString(),dir);
 	}
 	
 	 public static void WriteStringToFile2(String file,String filePath) {
@@ -1055,7 +1592,7 @@ public class GetAllPatternsUtil
 	            FileWriter fw = new FileWriter(filePath, true);
 	            BufferedWriter bw = new BufferedWriter(fw);
 	            bw.append(file);
-//	            bw.write("abc\r\n ");// 往已有的文件上添加字符串
+//	            bw.write(file);// 往已有的文件上添加字符串
 	            bw.close();
 	            fw.close();
 	        } catch (Exception e) {
@@ -1065,7 +1602,7 @@ public class GetAllPatternsUtil
 	    }
 
 	public static void getAllGamesPossiblePatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId,
-			String fileName, JsonRootBean jsonRoot)
+			String fileName, JsonRootBean jsonRoot,String dir)
 	{
 		//去重
 		List<Pattern> possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf(jsonRoot.getPattern());
@@ -1075,8 +1612,6 @@ public class GetAllPatternsUtil
 		possiblePatterns.addAll(patterns3);
 		//去重
 		possiblePatterns = getAllPatternsUtil.getPossiblePatternsCompareToSelf2(possiblePatterns);
-		//去bingo
-//		possiblePatterns = filterMoreThanOneBingo(possiblePatterns);
 		//按照value从大到小重新排序
 		Collections.sort(possiblePatterns);
 		//别名重定义
@@ -1087,8 +1622,7 @@ public class GetAllPatternsUtil
 			a++;
 		}
 		jsonRoot.setPattern(possiblePatterns);
-//		System.out.println(jsonRoot.toString());
-		WriteStringToFile2(jsonRoot.toString(),"./config/Pachinko3backup.txt");
+		WriteStringToFile2(jsonRoot.toString(),dir);
 	}
 
 	private static List<Pattern> filterMoreThanOneBingo(List<Pattern> possiblePatterns)
@@ -1113,9 +1647,9 @@ public class GetAllPatternsUtil
 		return getAllPatternsUtil.jsonRootBean;
 	}
 
-	private static void getShowBall3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
+	private static void getShowBall3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns20(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	private static JsonRootBean getAllPossiblePatterns20(GetAllPatternsUtil getAllPatternsUtil, int gameId,
@@ -1160,9 +1694,9 @@ public class GetAllPatternsUtil
 		return getAllPatternsUtil.jsonRootBean;
 	}
 
-	private static void getPachinko3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName) {
+	private static void getPachinko3PatternsNew(GetAllPatternsUtil getAllPatternsUtil, int gameId, String fileName,String dir) {
 		JsonRootBean jsonRoot = getAllPossiblePatterns41(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 
 	/*class newMyThread extends Thread{
@@ -1235,10 +1769,10 @@ public class GetAllPatternsUtil
 		return getAllPatternsUtil.jsonRootBean;
 	}
 
-	public static void getAmericanPatternsNew(GetAllPatternsUtil getAllPatternsUtil,int gameId,String fileName)
+	public static void getAmericanPatternsNew(GetAllPatternsUtil getAllPatternsUtil,int gameId,String fileName,String dir)
 	{
 		JsonRootBean jsonRoot = getAllPossiblePatterns39(getAllPatternsUtil,gameId,fileName);
-		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot);
+		getAllGamesPossiblePatternsNew(getAllPatternsUtil, gameId, fileName, jsonRoot,dir);
 	}
 	
 

@@ -1,0 +1,26 @@
+JsonRootBean [machineId=23, machineName=Black Star, cardWidth=5, cardHeight=3, numPerCard=15, availableBalls=60, maxPrizeValue=1500, pattern=[Pattern [name=bingo, alias=P0, format=111111111111111, value=1500, r=1, weight=0.0, is_eb=true, formatCode=32767, sunNum=15
+], Pattern [name=false Bingo, alias=P1, format=111111101111111, value=1450, r=1, weight=0.0, is_eb=true, formatCode=32639, sunNum=14
+], Pattern [name=perimeter, alias=P2, format=111111000111111, value=750, r=1, weight=0.0, is_eb=true, formatCode=32319, sunNum=12
+], Pattern [name=double_Triangle, alias=P3, format=111110101011111, value=500, r=1, weight=0.0, is_eb=true, formatCode=32095, sunNum=12
+], Pattern [name=double_line+H, alias=P4, format=111111111110001, value=160, r=0, weight=0.0, is_eb=false, formatCode=32753, sunNum=12
+], Pattern [name=double_line+H, alias=P5, format=100011111111111, value=160, r=0, weight=0.0, is_eb=false, formatCode=18431, sunNum=12
+], Pattern [name=double_line+square, alias=P6, format=111111111101110, value=140, r=0, weight=0.0, is_eb=false, formatCode=32750, sunNum=13
+], Pattern [name=double_line+square, alias=P7, format=011101111111111, value=140, r=0, weight=0.0, is_eb=false, formatCode=15359, sunNum=13
+], Pattern [name=double_line+trangle, alias=P8, format=111111111100100, value=110, r=0, weight=0.0, is_eb=false, formatCode=32740, sunNum=11
+], Pattern [name=double_line+trangle, alias=P9, format=001001111111111, value=110, r=0, weight=0.0, is_eb=false, formatCode=5119, sunNum=11
+], Pattern [name=double_line, alias=P10, format=111110000011111, value=100, r=1, weight=0.0, is_eb=true, formatCode=31775, sunNum=10
+], Pattern [name=double_line, alias=P11, format=111111111100000, value=100, r=1, weight=0.0, is_eb=true, formatCode=32736, sunNum=10
+], Pattern [name=double_line, alias=P12, format=000001111111111, value=100, r=1, weight=0.0, is_eb=true, formatCode=1023, sunNum=10
+], Pattern [name=H+trangle, alias=P13, format=111111111110101, value=70, r=0, weight=0.0, is_eb=false, formatCode=32757, sunNum=13
+], Pattern [name=H+trangle, alias=P14, format=101011111111111, value=70, r=0, weight=0.0, is_eb=false, formatCode=22527, sunNum=13
+], Pattern [name=H, alias=P15, format=100011111110001, value=60, r=1, weight=0.0, is_eb=true, formatCode=18417, sunNum=9
+], Pattern [name=square+trangle, alias=P16, format=111110101001110, value=50, r=0, weight=0.0, is_eb=false, formatCode=32078, sunNum=10
+], Pattern [name=square+trangle, alias=P17, format=011100101011111, value=50, r=0, weight=0.0, is_eb=false, formatCode=14687, sunNum=10
+], Pattern [name=square+line, alias=P18, format=011101111101110, value=43, r=0, weight=0.0, is_eb=false, formatCode=15342, sunNum=11
+], Pattern [name=square, alias=P19, format=011100101001110, value=40, r=1, weight=0.0, is_eb=true, formatCode=14670, sunNum=8
+], Pattern [name=trangle, alias=P20, format=111110101000100, value=10, r=1, weight=0.0, is_eb=true, formatCode=32068, sunNum=8
+], Pattern [name=trangle, alias=P21, format=001000101011111, value=10, r=1, weight=0.0, is_eb=true, formatCode=4447, sunNum=8
+], Pattern [name=line, alias=P22, format=111110000000000, value=3, r=1, weight=0.0, is_eb=true, formatCode=31744, sunNum=5
+], Pattern [name=line, alias=P23, format=000000000011111, value=3, r=1, weight=0.0, is_eb=true, formatCode=31, sunNum=5
+], Pattern [name=line, alias=P24, format=000001111100000, value=3, r=1, weight=0.0, is_eb=true, formatCode=992, sunNum=5
+]]]

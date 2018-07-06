@@ -76,6 +76,9 @@ public class PatternUtil
     	}
 		return false;
     }
+    public static boolean isMatch3(int src,int dst){
+    	return (src & dst) == dst;
+    }
 
     //parse string flags to binary number
     //for example "1111100000" -> 0b1111100000
