@@ -28,7 +28,7 @@
 		"name": "perimeter",
 		"alias": "P03",
 		"format": "111111000111111",
-		"value": 450,
+		"value": 750,
 		"r": 1,
 		"weight": 0,
 		"is_eb": true
