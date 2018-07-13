@@ -125,7 +125,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			if(i==size-1) {
 				System.out.println(i);
 			}
@@ -173,9 +173,11 @@ public class GetAllPatternsUtil
 											
 											for (int w = 1; w < allCodesList.size(); w++)
 											{
-												if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-													delCode.add(allCodesList.get(w));
-													allPatternsCodeMap.remove(allCodesList.get(w));
+												for(int x=w+1;x< allCodesList.size();x++){
+													if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+														delCode.add(allCodesList.get(x));
+														allPatternsCodeMap.remove(allCodesList.get(x));
+													}
 												}
 											}
 											allCodesList.removeAll(delCode);
@@ -243,7 +245,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			if(i==size-1) {
 				System.out.println(i);
 			}
@@ -287,9 +289,11 @@ public class GetAllPatternsUtil
 										
 										for (int w = 1; w < allCodesList.size(); w++)
 										{
-											if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-												delCode.add(allCodesList.get(w));
-												allPatternsCodeMap.remove(allCodesList.get(w));
+											for(int x=w+1;x< allCodesList.size();x++){
+												if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+													delCode.add(allCodesList.get(x));
+													allPatternsCodeMap.remove(allCodesList.get(x));
+												}
 											}
 										}
 										allCodesList.removeAll(delCode);
@@ -356,7 +360,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			if(i==size-1) {
 				System.out.println(i);
 			}
@@ -396,9 +400,11 @@ public class GetAllPatternsUtil
 									
 									for (int w = 1; w < allCodesList.size(); w++)
 									{
-										if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-											delCode.add(allCodesList.get(w));
-											allPatternsCodeMap.remove(allCodesList.get(w));
+										for(int x=w+1;x< allCodesList.size();x++){
+											if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+												delCode.add(allCodesList.get(x));
+												allPatternsCodeMap.remove(allCodesList.get(x));
+											}
 										}
 									}
 									allCodesList.removeAll(delCode);
@@ -563,7 +569,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			if(i==size-1) {
 				System.out.println(i);
 			}
@@ -599,9 +605,11 @@ public class GetAllPatternsUtil
 								
 								for (int w = 1; w < allCodesList.size(); w++)
 								{
-									if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-										delCode.add(allCodesList.get(w));
-										allPatternsCodeMap.remove(allCodesList.get(w));
+									for(int x=w+1;x< allCodesList.size();x++){
+										if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+											delCode.add(allCodesList.get(x));
+											allPatternsCodeMap.remove(allCodesList.get(x));
+										}
 									}
 								}
 								allCodesList.removeAll(delCode);
@@ -758,7 +766,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			for(j=i+1;j<size;j++){
 				for( k = j+1;k<size;k++){
 					for(L=k+1;L<size;L++) {
@@ -787,9 +795,11 @@ public class GetAllPatternsUtil
 							
 							for (int w = 1; w < allCodesList.size(); w++)
 							{
-								if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-									delCode.add(allCodesList.get(w));
-									allPatternsCodeMap.remove(allCodesList.get(w));
+								for(int x=w+1;x< allCodesList.size();x++){
+									if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+										delCode.add(allCodesList.get(x));
+										allPatternsCodeMap.remove(allCodesList.get(x));
+									}
 								}
 							}
 							allCodesList.removeAll(delCode);
@@ -940,7 +950,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			   for(j=i+1;j<size;j++){
 				   for(k = j+1;k<size;k++){
 					   for(L=k+1;L< size;L++) {
@@ -968,9 +978,11 @@ public class GetAllPatternsUtil
 							
 							for (int w = 1; w < allCodesList.size(); w++)
 							{
-								if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-									delCode.add(allCodesList.get(w));
-									allPatternsCodeMap.remove(allCodesList.get(w));
+								for(int x=w+1;x< allCodesList.size();x++){
+									if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+										delCode.add(allCodesList.get(x));
+										allPatternsCodeMap.remove(allCodesList.get(x));
+									}
 								}
 							}
 							allCodesList.removeAll(delCode);
@@ -1115,7 +1127,7 @@ public class GetAllPatternsUtil
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
 		int size = patterns.size();
-		for(i=0;i<size;i++){
+		for(i=1;i<size;i++){
 			   for(j=i+1;j<size;j++){
 				   for(k = j+1;k<size;k++){
 					   int codeNew = 0;
@@ -1138,9 +1150,11 @@ public class GetAllPatternsUtil
 						
 						for (int w = 1; w< allCodesList.size(); w++)
 						{
-							if(PatternUtil.isMatch3(code1, allCodesList.get(w))){
-								delCode.add(allCodesList.get(w));
-								allPatternsCodeMap.remove(allCodesList.get(w));
+							for(int x=w+1;x< allCodesList.size();x++){
+								if(PatternUtil.isMatch3(allCodesList.get(w), allCodesList.get(x))&&allCodesList.get(w)!=469440){
+									delCode.add(allCodesList.get(x));
+									allPatternsCodeMap.remove(allCodesList.get(x));
+								}
 							}
 						}
 						allCodesList.removeAll(delCode);
@@ -1253,6 +1267,47 @@ public class GetAllPatternsUtil
 		//ШЅжи
 //		patterns = getPossiblePatternsCompareToSelf(patterns);
 	}
+	
+	public void getPossiblePachinkoPatternsWithWell(List<Pattern> patterns){
+		List<Pattern> newPatterns = new ArrayList<Pattern>();
+		int i,j = 0;
+		int code1,code2,codeNew=0;
+		Pattern pattern = null;
+		String patternNew = "";
+		for(i=1;i<patterns.size();i++){
+			   for(j=i+1;j<patterns.size();j++){
+				   int value = patterns.get(i).getValue()+patterns.get(j).getValue();
+				   if(value >= maxPrizeValue) {
+						continue;
+					}
+				   code1 = patterns.get(i).getFormatCode();
+				   code2 = patterns.get(j).getFormatCode();
+				   if(PatternUtil.isMatch3(code1, code2) && code2==469440){
+					   pattern = new Pattern();
+					   pattern = new Pattern();
+					   pattern.setValue(value);
+					   pattern.setName(patterns.get(i).getName()+"+"+patterns.get(j).getName());
+					   code1 = patterns.get(i).getFormatCode();
+					   code2 = patterns.get(j).getFormatCode();
+					   codeNew = code1 | code2;
+					   patternNew = Integer.toBinaryString(codeNew);
+					   if(patternNew.length()< numPerCard){
+						   int len = numPerCard-patternNew.length();
+						   String str = "";
+						   for(int z =0;z<len;z++){
+							   str += "0";
+						   }
+						   patternNew = str+patternNew;
+					   }
+					   pattern.setFormat(patternNew);
+					   pattern.setFormatCode(codeNew);
+					   pattern.setSunNum(PatternUtil.sunNum(codeNew, numPerCard));
+					   newPatterns.add(pattern);
+				   }
+			   }
+		}
+	}
+	
 	public void getPossiblePatternsFromTwoInN(List<Pattern> patterns){
 	   List<Pattern> newPatterns = new ArrayList<>();
 	   Pattern pattern = null;
@@ -1260,18 +1315,15 @@ public class GetAllPatternsUtil
 		int code1,code2,codeNew=0;
 //		int numPerCard = cardHeight*cardWidth;
 		String patternNew = "";
-	   for(i=0;i<patterns.size();i++){
+	   for(i=1;i<patterns.size();i++){
 		   for(j=i+1;j<patterns.size();j++){
-			   if(i==9){
-				   System.out.println(i);
-			   }
 			   int value = patterns.get(i).getValue()+patterns.get(j).getValue();
 				if(value >= maxPrizeValue) {
 					continue;
 				}
 			   code1 = patterns.get(i).getFormatCode();
 			   code2 = patterns.get(j).getFormatCode();
-			   if(PatternUtil.isMatch3(code1, code2)){
+			   if(PatternUtil.isMatch3(code1, code2) && code2!=469440){
 				   continue;
 			   }
 			   pattern = new Pattern();
@@ -1328,7 +1380,7 @@ public class GetAllPatternsUtil
 		//gameId:29
 //		getAmericanPatternsNew(getAllPatternsUtil,29,"American.json","./config/AmericanBackUp.txt");
 		//gameId:41
-//		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json","./config/pachinko3BackUp2.txt");
+		getPachinko3PatternsNew(getAllPatternsUtil,41,"pachinko3.json","./config/pachinko3BackUp5.txt");
 		//gameId:61
 //		getPachinko2PatternsNew(getAllPatternsUtil,61,"pachinko2.json","./config/pachinko2BackUp.txt");
 		//gameId:20
